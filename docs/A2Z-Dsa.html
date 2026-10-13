@@ -1,0 +1,1651 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>A2Z DSA</title>
+<meta name="description" content="A C++-only progress tracker for Striver's A2Z DSA Sheet." />
+
+<!-- Apply saved theme before first paint (no flash) -->
+<script>
+  (function () {
+    var t = null;
+    try { t = JSON.parse(localStorage.getItem('a2z:theme')); } catch (e) {}
+    var dark = t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (dark) document.documentElement.classList.add('dark');
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<!-- Tailwind utilities, precompiled (no runtime CDN) -->
+<style>*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:JetBrains Mono,ui-monospace,SFMono-Regular,Menlo,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.collapse{visibility:collapse}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0}.top-0{top:0}.top-16{top:4rem}.top-\[136px\]{top:136px}.-z-0{z-index:0}.z-30{z-index:30}.z-40{z-index:40}.col-span-2{grid-column:span 2/span 2}.mx-1{margin-left:.25rem;margin-right:.25rem}.mx-auto{margin-left:auto;margin-right:auto}.-mr-1{margin-right:-.25rem}.mb-1\.5{margin-bottom:.375rem}.mb-2{margin-bottom:.5rem}.ml-2{margin-left:.5rem}.ml-7{margin-left:1.75rem}.ml-auto{margin-left:auto}.mt-0\.5{margin-top:.125rem}.mt-1{margin-top:.25rem}.mt-1\.5{margin-top:.375rem}.mt-12{margin-top:3rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.mt-8{margin-top:2rem}.block{display:block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-1\.5{height:.375rem}.h-10{height:2.5rem}.h-11{height:2.75rem}.h-14{height:3.5rem}.h-16{height:4rem}.h-4{height:1rem}.h-5{height:1.25rem}.h-6{height:1.5rem}.h-8{height:2rem}.h-\[22px\]{height:22px}.max-h-\[calc\(100vh-160px\)\]{max-height:calc(100vh - 160px)}.min-h-screen{min-height:100vh}.w-1\.5{width:.375rem}.w-10{width:2.5rem}.w-11{width:2.75rem}.w-14{width:3.5rem}.w-20{width:5rem}.w-4{width:1rem}.w-5{width:1.25rem}.w-7{width:1.75rem}.w-8{width:2rem}.w-\[min\(760px\2c calc\(100vw-24px\)\)\]{width:min(760px,calc(100vw - 24px))}.w-px{width:1px}.min-w-0{min-width:0}.min-w-\[220px\]{min-width:220px}.max-w-7xl{max-width:80rem}.max-w-xl{max-width:36rem}.flex-1{flex:1 1 0%}.flex-shrink{flex-shrink:1}.shrink-0{flex-shrink:0}.-rotate-90{--tw-rotate:-90deg}.-rotate-90,.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.resize{resize:both}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.place-items-center{place-items:center}.items-start{align-items:flex-start}.items-center{align-items:center}.items-baseline{align-items:baseline}.justify-between{justify-content:space-between}.gap-0\.5{gap:.125rem}.gap-1{gap:.25rem}.gap-1\.5{gap:.375rem}.gap-2{gap:.5rem}.gap-2\.5{gap:.625rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.space-y-0\.5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.125rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.125rem*var(--tw-space-y-reverse))}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.5rem*var(--tw-space-y-reverse))}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}.self-start{align-self:flex-start}.overflow-y-auto{overflow-y:auto}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rounded-2xl{border-radius:1rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:.5rem}.rounded-xl{border-radius:.75rem}.border{border-width:1px}.border-y{border-top-width:1px}.border-b,.border-y{border-bottom-width:1px}.border-t{border-top-width:1px}.p-10{padding:2.5rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.px-1{padding-left:.25rem;padding-right:.25rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-2\.5{padding-left:.625rem;padding-right:.625rem}.px-3\.5{padding-left:.875rem;padding-right:.875rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.py-2\.5{padding-top:.625rem;padding-bottom:.625rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-8{padding-top:2rem;padding-bottom:2rem}.pb-1\.5{padding-bottom:.375rem}.pb-10{padding-bottom:2.5rem}.pb-2{padding-bottom:.5rem}.pb-3{padding-bottom:.75rem}.pb-8{padding-bottom:2rem}.pr-1{padding-right:.25rem}.pt-10{padding-top:2.5rem}.pt-3{padding-top:.75rem}.text-center{text-align:center}.font-mono{font-family:JetBrains Mono,ui-monospace,SFMono-Regular,Menlo,monospace}.font-sans{font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-\[10\.5px\]{font-size:10.5px}.text-\[11\.5px\]{font-size:11.5px}.text-\[11px\]{font-size:11px}.text-\[13px\]{font-size:13px}.text-\[15px\]{font-size:15px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:.75rem;line-height:1rem}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-snug{line-height:1.375}.leading-tight{line-height:1.25}.tracking-\[-0\.025em\]{letter-spacing:-.025em}.tracking-\[0\.08em\]{letter-spacing:.08em}.tracking-tight{letter-spacing:-.025em}.tracking-wide{letter-spacing:.025em}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.outline{outline-style:solid}.blur{--tw-blur:blur(8px)}.blur,.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-filter{-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.dark\:inline:is(.dark *){display:inline}.dark\:hidden:is(.dark *){display:none}@media (min-width:640px){.sm\:ml-auto{margin-left:auto}.sm\:block{display:block}.sm\:inline{display:inline}.sm\:flex{display:flex}.sm\:inline-flex{display:inline-flex}.sm\:w-32{width:8rem}.sm\:flex-row{flex-direction:row}.sm\:items-center{align-items:center}.sm\:gap-3{gap:.75rem}.sm\:self-auto{align-self:auto}.sm\:truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.sm\:p-5{padding:1.25rem}.sm\:px-3{padding-left:.75rem;padding-right:.75rem}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:text-4xl{font-size:2.25rem;line-height:2.5rem}.sm\:text-base{font-size:1rem;line-height:1.5rem}}@media (min-width:768px){.md\:inline{display:inline}.md\:px-6{padding-left:1.5rem;padding-right:1.5rem}}@media (min-width:1024px){.lg\:col-span-1{grid-column:span 1/span 1}.lg\:block{display:block}.lg\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.lg\:grid-cols-\[260px_minmax\(0\2c 1fr\)\]{grid-template-columns:260px minmax(0,1fr)}.lg\:flex-row{flex-direction:row}.lg\:items-end{align-items:flex-end}.lg\:justify-between{justify-content:space-between}.lg\:self-auto{align-self:auto}}</style>
+
+<style>
+  /* ---------- Design tokens ---------- */
+  :root {
+    --bg: #f8f9fb;
+    --bg-grid: rgba(15, 23, 42, 0.045);
+    --panel: #ffffff;
+    --panel-2: #f3f4f7;
+    --hover: #f5f6f9;
+    --border: #e6e8ee;
+    --border-strong: #d5d9e2;
+    --text: #0b0d12;
+    --text-2: #3a3f4b;
+    --muted: #6b7280;
+    --faint: #9aa1ae;
+    --accent: #5b5bf0;
+    --accent-soft: rgba(91, 91, 240, 0.10);
+    --accent-ring: rgba(91, 91, 240, 0.35);
+    --grad: linear-gradient(90deg, #5b5bf0 0%, #8b5cf6 100%);
+    --glow: none;
+    --shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 1px 3px rgba(16, 24, 40, 0.04);
+    --shadow-lg: 0 12px 40px -12px rgba(16, 24, 40, 0.18);
+
+    --easy-fg: #047857;  --easy-bg: #ecfdf5;  --easy-bd: rgba(5, 150, 105, 0.22);
+    --med-fg:  #b45309;  --med-bg:  #fffbeb;  --med-bd:  rgba(217, 119, 6, 0.25);
+    --hard-fg: #be123c;  --hard-bg: #fff1f2;  --hard-bd: rgba(225, 29, 72, 0.22);
+  }
+  .dark {
+    --bg: #0a0b0f;
+    --bg-grid: rgba(148, 163, 184, 0.05);
+    --panel: #101218;
+    --panel-2: #151821;
+    --hover: #141720;
+    --border: #1d212c;
+    --border-strong: #2a2f3d;
+    --text: #e8eaf0;
+    --text-2: #c3c8d4;
+    --muted: #8a91a2;
+    --faint: #586073;
+    --accent: #8b8cff;
+    --accent-soft: rgba(139, 140, 255, 0.12);
+    --accent-ring: rgba(139, 140, 255, 0.45);
+    --grad: linear-gradient(90deg, #7c7dff 0%, #22d3ee 100%);
+    --glow: 0 0 14px rgba(34, 211, 238, 0.35);
+    --shadow: 0 0 0 1px rgba(255, 255, 255, 0.015);
+    --shadow-lg: 0 20px 50px -20px rgba(0, 0, 0, 0.7);
+
+    --easy-fg: #34d399;  --easy-bg: rgba(16, 185, 129, 0.10);  --easy-bd: rgba(52, 211, 153, 0.22);
+    --med-fg:  #fbbf24;  --med-bg:  rgba(245, 158, 11, 0.10);  --med-bd:  rgba(251, 191, 36, 0.22);
+    --hard-fg: #fb7185;  --hard-bg: rgba(244, 63, 94, 0.10);   --hard-bd: rgba(251, 113, 133, 0.24);
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-feature-settings: 'cv11', 'ss01', 'ss03';
+    -webkit-font-smoothing: antialiased;
+    transition: background-color .25s ease, color .25s ease;
+  }
+  ::selection { background: var(--accent-ring); }
+
+  .bg-grid {
+    background-image:
+      linear-gradient(var(--bg-grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 100%);
+  }
+
+  /* ---------- Surfaces ---------- */
+  .panel { background: var(--panel); border: 1px solid var(--border); box-shadow: var(--shadow); }
+  .hairline { border-color: var(--border); }
+  .t-muted { color: var(--muted); }
+  .t-faint { color: var(--faint); }
+  .t-2 { color: var(--text-2); }
+
+  .glass {
+    background: color-mix(in srgb, var(--bg) 78%, transparent);
+    backdrop-filter: saturate(180%) blur(14px);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn-ghost {
+    display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+    height: 34px; padding: 0 .65rem; border-radius: .6rem;
+    color: var(--muted); border: 1px solid transparent;
+    transition: background .15s, color .15s, border-color .15s;
+  }
+  .btn-ghost:hover { background: var(--hover); color: var(--text); border-color: var(--border); }
+  .btn-ghost:focus-visible, .seg button:focus-visible, .act:focus-visible, .step-head:focus-visible, .nav-item:focus-visible {
+    outline: none; box-shadow: 0 0 0 3px var(--accent-ring);
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: .5rem;
+    height: 38px; padding: 0 .95rem; border-radius: .65rem;
+    font-weight: 500; font-size: .875rem;
+    background: var(--text); color: var(--bg);
+    transition: transform .15s ease, opacity .15s;
+  }
+  .btn-primary:hover { opacity: .9; }
+  .btn-primary:active { transform: scale(.98); }
+
+  /* Segmented control */
+  .seg { display: inline-flex; padding: 3px; border-radius: .7rem; background: var(--panel-2); border: 1px solid var(--border); }
+  .seg button {
+    height: 28px; padding: 0 .7rem; border-radius: .5rem; font-size: .8125rem; font-weight: 500;
+    color: var(--muted); transition: all .15s ease; white-space: nowrap;
+  }
+  .seg button:hover { color: var(--text); }
+  .seg button.active { background: var(--panel); color: var(--text); box-shadow: 0 1px 2px rgba(0,0,0,.08), 0 0 0 1px var(--border); }
+
+  /* Search */
+  .search {
+    display: flex; align-items: center; gap: .5rem; height: 38px; padding: 0 .75rem;
+    border-radius: .7rem; background: var(--panel); border: 1px solid var(--border);
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .search:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .search input { background: transparent; outline: none; flex: 1; min-width: 0; font-size: .875rem; color: var(--text); }
+  .search input::placeholder { color: var(--faint); }
+  .kbd {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1;
+    padding: 3px 6px; border-radius: 5px; color: var(--faint);
+    border: 1px solid var(--border); background: var(--panel-2);
+  }
+
+  /* ---------- Progress ---------- */
+  .bar { height: 6px; border-radius: 999px; background: var(--panel-2); overflow: hidden; border: 1px solid var(--border); }
+  .bar.thin { height: 4px; border: 0; }
+  .bar > i {
+    display: block; height: 100%; width: 0; border-radius: inherit;
+    background: var(--grad); box-shadow: var(--glow);
+    transition: width .6s cubic-bezier(.22, 1, .36, 1);
+  }
+  .bar.e > i { background: var(--easy-fg); box-shadow: none; }
+  .bar.m > i { background: var(--med-fg);  box-shadow: none; }
+  .bar.h > i { background: var(--hard-fg); box-shadow: none; }
+  .bar.full > i { animation: pulseBar 1.2s ease 1; }
+  @keyframes pulseBar { 50% { filter: brightness(1.35); } }
+
+  .ring-track { stroke: var(--panel-2); }
+  .ring-fill { stroke: url(#ringGrad); transition: stroke-dashoffset .7s cubic-bezier(.22, 1, .36, 1); }
+
+  /* ---------- Steps (accordion) ---------- */
+  .step { scroll-margin-top: 132px; }
+  .step-head { width: 100%; text-align: left; border-radius: .9rem; transition: background .15s; }
+  .step-head:hover { background: var(--hover); }
+  .step-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s cubic-bezier(.22, 1, .36, 1); }
+  .step-body > div { overflow: hidden; min-height: 0; }
+  .step.open .step-body, body.filtering .step-body { grid-template-rows: 1fr; }
+  .chev { transition: transform .25s ease; color: var(--faint); }
+  .step.open .chev, body.filtering .chev { transform: rotate(180deg); }
+  .step.complete .step-title::after {
+    content: 'Complete'; margin-left: .5rem; font-size: 10.5px; font-weight: 600; letter-spacing: .02em;
+    padding: 2px 7px; border-radius: 999px; vertical-align: 2px;
+    color: var(--accent); background: var(--accent-soft);
+  }
+
+  /* ---------- Problem rows ---------- */
+  .row {
+    position: relative; display: flex; align-items: center; gap: .75rem;
+    padding: .6rem .75rem .6rem .7rem; border-radius: .7rem;
+    border: 1px solid transparent;
+    transition: background .15s ease, border-color .15s ease;
+  }
+  .row:hover { background: var(--hover); border-color: var(--border); }
+  .row .title { color: var(--text); font-size: .9rem; font-weight: 500; transition: color .2s; }
+  .row.done .title { color: var(--muted); }
+  .row.done .num { color: var(--accent); }
+  .row.flash { animation: flash 1.6s ease; }
+  @keyframes flash { 0%, 40% { background: var(--accent-soft); border-color: var(--accent-ring); } }
+
+  /* Custom checkbox */
+  .cb { position: relative; display: inline-flex; flex-shrink: 0; cursor: pointer; }
+  .cb input { position: absolute; inset: 0; opacity: 0; cursor: pointer; margin: 0; }
+  .cb .box {
+    width: 20px; height: 20px; border-radius: 6px; display: grid; place-items: center;
+    border: 1.5px solid var(--border-strong); background: var(--panel);
+    transition: background .18s ease, border-color .18s ease, transform .12s ease, box-shadow .18s;
+  }
+  .cb:hover .box { border-color: var(--accent); }
+  .cb input:focus-visible + .box { box-shadow: 0 0 0 3px var(--accent-ring); }
+  .cb input:active + .box { transform: scale(.88); }
+  .cb .box svg { width: 13px; height: 13px; color: #fff; stroke-width: 3; stroke-dasharray: 24; stroke-dashoffset: 24; transition: stroke-dashoffset .28s ease .05s; }
+  .cb input:checked + .box { background: var(--accent); border-color: var(--accent); box-shadow: var(--glow); }
+  .cb input:checked + .box svg { stroke-dashoffset: 0; }
+
+  /* Difficulty badges */
+  .badge {
+    display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 8px;
+    border-radius: 999px; font-size: 11.5px; font-weight: 600; letter-spacing: .01em; white-space: nowrap;
+    border: 1px solid;
+  }
+  .badge::before { content: ''; width: 5px; height: 5px; border-radius: 999px; background: currentColor; }
+  .badge.E { color: var(--easy-fg); background: var(--easy-bg); border-color: var(--easy-bd); }
+  .badge.M { color: var(--med-fg);  background: var(--med-bg);  border-color: var(--med-bd); }
+  .badge.H { color: var(--hard-fg); background: var(--hard-bg); border-color: var(--hard-bd); }
+  .badge.T, .badge.U { color: var(--muted); background: var(--panel-2); border-color: var(--border); }
+  .act.off { opacity: .28; cursor: default; }
+  .act.off:hover { background: transparent; box-shadow: none; color: var(--faint); }
+
+  /* Action icons */
+  .act {
+    position: relative; width: 32px; height: 32px; display: grid; place-items: center; border-radius: .55rem;
+    color: var(--faint); transition: color .15s, background .15s, transform .15s;
+  }
+  .act svg { width: 17px; height: 17px; }
+  .act:hover { background: var(--panel); color: var(--text); box-shadow: 0 0 0 1px var(--border); }
+  .act.practice:hover { color: var(--med-fg); }
+  .act.article:hover  { color: var(--accent); }
+  .act.tuf:hover      { color: var(--easy-fg); }
+  .act.video:hover    { color: #ef4444; }
+  .act.notes.has { color: var(--accent); }
+  .act.notes.has::after {
+    content: ''; position: absolute; top: 6px; right: 6px; width: 5px; height: 5px; border-radius: 999px; background: var(--accent);
+  }
+  .act[data-tip]:hover::before {
+    content: attr(data-tip); position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+    padding: 4px 8px; border-radius: 6px; white-space: nowrap; pointer-events: none; z-index: 20;
+    font-size: 11px; font-weight: 500; background: var(--text); color: var(--bg);
+  }
+
+  /* Sidebar nav */
+  .nav-item { width: 100%; text-align: left; border-radius: .6rem; padding: .5rem .6rem; transition: background .15s; }
+  .nav-item:hover { background: var(--hover); }
+  .nav-item.active { background: var(--panel); box-shadow: 0 0 0 1px var(--border); }
+
+  /* Notes dialog */
+  dialog { background: transparent; padding: 0; max-width: none; max-height: none; }
+  dialog::backdrop { background: rgba(5, 7, 12, 0.55); backdrop-filter: blur(4px); }
+  dialog[open] .sheet { animation: rise .28s cubic-bezier(.22, 1, .36, 1); }
+  @keyframes rise { from { opacity: 0; transform: translateY(12px) scale(.985); } }
+  .code-area {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.65; tab-size: 4;
+    background: var(--panel-2); color: var(--text); border: 1px solid var(--border);
+    border-radius: .75rem; padding: 1rem; width: 100%; resize: vertical; outline: none;
+  }
+  .code-area:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .field {
+    background: var(--panel-2); border: 1px solid var(--border); border-radius: .6rem;
+    height: 36px; padding: 0 .7rem; font-family: 'JetBrains Mono', monospace; font-size: 12.5px;
+    color: var(--text); outline: none; width: 100%;
+  }
+  .field:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+
+  /* Toast */
+  .toast {
+    position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); opacity: 0; pointer-events: none;
+    padding: .6rem .9rem; border-radius: .7rem; font-size: .85rem; font-weight: 500; z-index: 60;
+    background: var(--text); color: var(--bg); box-shadow: var(--shadow-lg);
+    transition: opacity .25s ease, transform .25s ease;
+  }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+  /* Scrollbar */
+  * { scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 999px; border: 3px solid var(--bg); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+
+<body class="min-h-screen font-sans">
+  <!-- Shared SVG defs -->
+  <svg width="0" height="0" class="absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="var(--accent)" />
+        <stop offset="100%" stop-color="#22d3ee" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- ============ Sticky header ============ -->
+  <header class="glass sticky top-0 z-40 border-b hairline">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 h-16 flex items-center gap-4">
+      <a href="#" class="flex items-center gap-2.5 shrink-0" aria-label="Top">
+        <span class="grid place-items-center w-8 h-8 rounded-lg" style="background:var(--text);color:var(--bg)">
+          <span class="font-mono text-[11px] font-semibold tracking-tight">A2Z</span>
+        </span>
+        <span class="hidden sm:flex flex-col leading-tight">
+          <span class="text-sm font-semibold tracking-tight">A2Z DSA</span>
+          <span class="text-[11px] t-muted font-mono">C++ track</span>
+        </span>
+      </a>
+
+      <div class="flex-1 flex items-center gap-3 min-w-0 md:px-6">
+        <div class="flex-1 min-w-0">
+          <div class="flex items-baseline justify-between mb-1.5">
+            <span class="text-[11px] font-medium uppercase tracking-[0.08em] t-muted">Overall progress</span>
+            <span class="font-mono text-xs"><span id="hdrDone" class="font-semibold">0</span><span class="t-faint"> / <span id="hdrTotal">0</span></span><span id="hdrPct" class="ml-2 font-semibold" style="color:var(--accent)">0%</span></span>
+          </div>
+          <div class="bar"><i id="hdrBar"></i></div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-1 shrink-0">
+        <button class="btn-ghost hidden sm:inline-flex" id="exportBtn" title="Export progress (JSON)" aria-label="Export progress"><span data-icon="download"></span></button>
+        <button class="btn-ghost hidden sm:inline-flex" id="importBtn" title="Import progress" aria-label="Import progress"><span data-icon="upload"></span></button>
+        <button class="btn-ghost hidden sm:inline-flex" id="resetBtn" title="Reset all progress" aria-label="Reset progress"><span data-icon="reset"></span></button>
+        <span class="hidden sm:block w-px h-5 mx-1" style="background:var(--border)"></span>
+        <button class="btn-ghost" id="themeBtn" title="Toggle theme" aria-label="Toggle dark mode">
+          <span class="dark:hidden" data-icon="moon"></span>
+          <span class="hidden dark:inline" data-icon="sun"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ Hero ============ -->
+  <section class="relative">
+    <div class="bg-grid absolute inset-0 -z-0 pointer-events-none"></div>
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 pt-10 pb-8">
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+        <div>
+          <div class="inline-flex items-center gap-2 h-6 px-2.5 rounded-full text-[11.5px] font-medium panel">
+            <span class="w-1.5 h-1.5 rounded-full" style="background:var(--accent);box-shadow:var(--glow)"></span>
+            <span class="t-2">Striver's A2Z DSA Sheet</span>
+            <span class="t-faint">·</span>
+            <span class="font-mono t-muted">C++17</span>
+          </div>
+          <h1 class="mt-4 text-3xl sm:text-4xl font-semibold tracking-[-0.025em]">From basics to advanced, <span class="t-muted">one problem at a time.</span></h1>
+          <p class="mt-2 text-sm t-muted max-w-xl">Every topic from the live sheet, with the same takeUforward, article, video and LeetCode links the sheet shows. Progress and your C++ notes stay in this browser.</p>
+        </div>
+        <button class="btn-primary self-start lg:self-auto" id="continueBtn">
+          <span id="continueLabel">Continue where you left off</span>
+          <span data-icon="arrowRight"></span>
+        </button>
+      </div>
+
+      <div class="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="panel rounded-xl p-4 flex items-center gap-4 col-span-2 lg:col-span-1">
+          <svg viewBox="0 0 40 40" class="w-14 h-14 -rotate-90 shrink-0">
+            <circle cx="20" cy="20" r="16" fill="none" stroke-width="4" class="ring-track"></circle>
+            <circle id="heroRing" cx="20" cy="20" r="16" fill="none" stroke-width="4" stroke-linecap="round" class="ring-fill" stroke-dasharray="100.53" stroke-dashoffset="100.53"></circle>
+          </svg>
+          <div>
+            <div class="text-[11px] font-medium uppercase tracking-[0.08em] t-muted">Solved</div>
+            <div class="mt-0.5 text-2xl font-semibold tracking-tight font-mono"><span id="heroDone">0</span><span class="text-base t-faint"> / <span id="heroTotal">0</span></span></div>
+          </div>
+        </div>
+        <div class="panel rounded-xl p-4" data-stat="E">
+          <div class="flex items-center justify-between"><span class="badge E">Easy</span><span class="font-mono text-xs t-muted" data-pct>0%</span></div>
+          <div class="mt-3 font-mono text-xl font-semibold"><span data-done>0</span><span class="text-sm t-faint"> / <span data-total>0</span></span></div>
+          <div class="bar thin e mt-2"><i></i></div>
+        </div>
+        <div class="panel rounded-xl p-4" data-stat="M">
+          <div class="flex items-center justify-between"><span class="badge M">Medium</span><span class="font-mono text-xs t-muted" data-pct>0%</span></div>
+          <div class="mt-3 font-mono text-xl font-semibold"><span data-done>0</span><span class="text-sm t-faint"> / <span data-total>0</span></span></div>
+          <div class="bar thin m mt-2"><i></i></div>
+        </div>
+        <div class="panel rounded-xl p-4" data-stat="H">
+          <div class="flex items-center justify-between"><span class="badge H">Hard</span><span class="font-mono text-xs t-muted" data-pct>0%</span></div>
+          <div class="mt-3 font-mono text-xl font-semibold"><span data-done>0</span><span class="text-sm t-faint"> / <span data-total>0</span></span></div>
+          <div class="bar thin h mt-2"><i></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Toolbar (sticky) ============ -->
+  <div class="glass sticky top-16 z-30 border-y hairline">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 py-2.5 flex flex-wrap items-center gap-2">
+      <label class="search flex-1 min-w-[220px]">
+        <span class="t-faint" data-icon="search"></span>
+        <input id="q" type="search" placeholder="Search problems…" autocomplete="off" spellcheck="false" />
+        <span class="kbd hidden sm:inline">/</span>
+      </label>
+      <div class="seg" role="group" aria-label="Difficulty filter">
+        <button data-f="diff" data-v="all" class="active">All</button>
+        <button data-f="diff" data-v="E">Easy</button>
+        <button data-f="diff" data-v="M">Medium</button>
+        <button data-f="diff" data-v="H">Hard</button>
+      </div>
+      <div class="seg" role="group" aria-label="Status filter">
+        <button data-f="status" data-v="all" class="active">Any</button>
+        <button data-f="status" data-v="todo">To do</button>
+        <button data-f="status" data-v="done">Solved</button>
+      </div>
+      <button class="btn-ghost" id="toggleAllBtn" title="Expand / collapse all">
+        <span data-icon="unfold"></span><span class="text-[13px] font-medium hidden md:inline" id="toggleAllLabel">Expand all</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ============ Main ============ -->
+  <main class="mx-auto max-w-7xl px-4 sm:px-6 py-8 grid lg:grid-cols-[260px_minmax(0,1fr)] gap-8">
+    <aside class="hidden lg:block">
+      <nav class="sticky top-[136px] max-h-[calc(100vh-160px)] overflow-y-auto pr-1 -mr-1" aria-label="Steps">
+        <div class="px-2 mb-2 text-[11px] font-medium uppercase tracking-[0.08em] t-muted">Steps</div>
+        <div id="nav" class="space-y-0.5"></div>
+      </nav>
+    </aside>
+
+    <div>
+      <div id="steps" class="space-y-3"></div>
+      <div id="empty" class="hidden panel rounded-xl p-10 text-center">
+        <div class="mx-auto w-10 h-10 rounded-full grid place-items-center" style="background:var(--panel-2)"><span class="t-muted" data-icon="search"></span></div>
+        <p class="mt-3 font-medium">No problems match</p>
+        <p class="text-sm t-muted mt-1">Try a different search or clear the filters.</p>
+        <button class="btn-ghost mt-4 mx-auto" id="clearFilters" style="border-color:var(--border)">Clear filters</button>
+      </div>
+
+      <footer class="mt-12 pb-10 text-xs t-faint flex flex-wrap justify-between gap-2">
+        <span>Problems and links from Striver's A2Z DSA Sheet by takeUforward. Easy / Medium / Hard map to the sheet's Basic / Core / Pro levels. Unofficial tracker.</span>
+        <span class="font-mono">Shortcuts: <span class="kbd">/</span> search · <span class="kbd">Esc</span> clear</span>
+      </footer>
+    </div>
+  </main>
+
+  <!-- ============ C++ notes dialog ============ -->
+  <dialog id="notes" aria-labelledby="notesTitle">
+    <div class="sheet panel rounded-2xl w-[min(760px,calc(100vw-24px))]" style="box-shadow:var(--shadow-lg)">
+      <div class="flex items-start gap-3 p-5 border-b hairline">
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.08em] t-muted">
+            <span id="notesStep"></span>
+          </div>
+          <h2 id="notesTitle" class="mt-1 text-lg font-semibold tracking-tight truncate"></h2>
+          <div class="mt-2 flex items-center gap-2"><span id="notesBadge" class="badge"></span><span class="inline-flex items-center h-[22px] px-2 rounded-full text-[11.5px] font-mono font-medium" style="background:var(--panel-2);border:1px solid var(--border);color:var(--text-2)">C++</span></div>
+        </div>
+        <button class="btn-ghost" id="notesClose" aria-label="Close"><span data-icon="x"></span></button>
+      </div>
+      <div class="p-5 space-y-4">
+        <div class="grid grid-cols-2 gap-3">
+          <label class="block">
+            <span class="block text-xs font-medium t-muted mb-1.5">Time complexity</span>
+            <input class="field" id="nTime" placeholder="O(n log n)" />
+          </label>
+          <label class="block">
+            <span class="block text-xs font-medium t-muted mb-1.5">Space complexity</span>
+            <input class="field" id="nSpace" placeholder="O(1)" />
+          </label>
+        </div>
+        <label class="block">
+          <span class="flex items-center justify-between text-xs font-medium t-muted mb-1.5">
+            <span>C++ solution / notes</span>
+            <span class="font-mono t-faint">Tab inserts 4 spaces</span>
+          </span>
+          <textarea id="nCode" class="code-area" rows="14" spellcheck="false"></textarea>
+        </label>
+      </div>
+      <div class="flex items-center justify-between px-5 py-3 border-t hairline">
+        <span class="text-xs t-faint" id="notesSaved">Saved automatically</span>
+        <div class="flex gap-2">
+          <button class="btn-ghost" id="notesCopy" style="border-color:var(--border)">Copy code</button>
+          <button class="btn-primary" id="notesDone">Done</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <input type="file" id="importFile" accept="application/json" class="hidden" />
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* =====================================================================
+   SHEET DATA — Striver's A2Z DSA Sheet, taken from takeuforward.org (Oct 2026)
+   Java/Python-only lessons removed (C++ track).
+   #|Topic   ##|Sub-topic
+   Problem|level(b=Basic→Easy, c=Core→Medium, p=Pro→Hard)|leetcode|tuf-practice|tuf-blog|youtube|tuf-lesson(slug@category)
+   ===================================================================== */
+const RAW = `
+#|Beginner Problems
+##|Fundamentals of Programming
+Breaking The Myth|||||qbwJ1U6I-IU|breaking-the-myth@fundamentals-of-programming
+Programming and What Are Computers?|||||y_tiNJXgA2U|programming-and-what-are-computers@fundamentals-of-programming
+How to Think Like a Programmer|||||iv7jtDODKrg|how-to-think-like-a-programmer@fundamentals-of-programming
+Flowcharts and Pseudocode|||||ynlGEO4bhiI|flowcharts-and-pseudocode@fundamentals-of-programming
+Flowchart Problem-Solving|||||usbMw83zi4c|flowchart-problem-solving@fundamentals-of-programming
+Dry Runs, Edge Cases and Debugging|||||Chf3JhFO4nU|dry-runs-edge-cases-and-debugging@fundamentals-of-programming
+Programming Languages and Choosing a Path|||||qY_PY3o-pd4|programming-languages-and-choosing-a-path@fundamentals-of-programming
+##|Language Basics
+Learn C++|b|||||learn-cpp@language-basics
+##|Logic Building (Patterns)
+Easy and Medium|c||||tNm_NNSB3_w|easy-and-medium@logic-building-patterns
+Hard|p||||tNm_NNSB3_w|hard@logic-building-patterns
+##|Patterns
+Pattern 1|b||pattern-1||tNm_NNSB3_w
+Pattern 2|b||pattern-2||tNm_NNSB3_w
+Pattern 3|b||pattern-3||tNm_NNSB3_w
+Pattern 4|b||pattern-4||tNm_NNSB3_w
+Pattern 5|b||pattern-5||tNm_NNSB3_w
+Pattern 6|b||pattern-6||tNm_NNSB3_w
+Pattern 7|b||pattern-7||tNm_NNSB3_w
+Pattern 8|b||pattern-8||tNm_NNSB3_w
+Pattern 9|b||pattern-9||tNm_NNSB3_w
+Pattern 10|b||pattern-10||tNm_NNSB3_w
+Pattern 11|b||pattern-11||tNm_NNSB3_w
+Pattern 12|b||pattern-12||tNm_NNSB3_w
+Pattern 13|b||pattern-13||tNm_NNSB3_w
+Pattern 14|b||pattern-14||tNm_NNSB3_w
+Pattern 15|b||pattern-15||tNm_NNSB3_w
+Pattern 16|b||pattern-16||tNm_NNSB3_w
+Pattern 17|b||pattern-17||tNm_NNSB3_w
+Pattern 18|b||pattern-18||tNm_NNSB3_w
+Pattern 19|b||pattern-19||tNm_NNSB3_w
+Pattern 20|c||pattern-20||tNm_NNSB3_w
+Pattern 21|c||pattern-21||tNm_NNSB3_w
+Pattern 22|c||pattern-22||tNm_NNSB3_w
+##|Time Complexity
+Theory with examples|c||||FPu9Uld7W-E|theory-with-examples@time-complexity
+##|Standard Libraries & Collections
+STL|c||||RRVYpIET_RU|stl@standard-libraries-and-collections
+##|Concept Basics
+Basic Maths|b|||||basic-maths@concept-basics
+Basic Arrays|b|||||basic-arrays-hashing-and-strings@concept-basics
+Basic Hashing|b||||KEs5UyBJ39g|basic-hashing@theory
+Basic String|b|||||basic-string@concept-basics
+##|Basic Maths
+Count all Digits of a Number|b||count-all-digits-of-a-number|count-digits-in-a-number|1xNbjMdbjug
+Count number of odd digits in a number|b||count-number-of-odd-digits-in-a-number|count-odd-digits-in-a-number
+Reverse a number|c|reverse-integer|reverse-a-number|reverse-digits-of-a-number|1xNbjMdbjug?t=930
+Palindrome Number|b|palindrome-number|palindrome-number|check-whether-a-number-is-a-palindrome|1xNbjMdbjug?t=1230
+Return the Largest Digit in a Number|b||return-the-largest-digit-in-a-number|find-the-largest-digit-in-a-number
+Factorial of a given number|b||factorial-of-a-given-number-i|factorial-of-a-number|69ZCDFy-OUo
+Check if the Number is Armstrong|b|armstrong-number|check-if-the-number-if-armstrong|armstrong-number|1xNbjMdbjug?t=1418
+Check for Perfect Number|b|perfect-number|check-for-perfect-number|perfect-number
+Check for Prime Number|c||check-for-prime-number|check-whether-a-number-is-prime|1xNbjMdbjug?t=2381
+Count of Prime Numbers till N|b|count-primes|count-of-prime-numbers-till-n
+GCD of Two Numbers|c||gcd-of-two-numbers|gcd-euclidean-algorithm|1xNbjMdbjug?t=2684
+LCM of two numbers|c||lcm-of-two-numbers
+Divisors of a Number|c||divisors-of-a-number|count-divisors|1xNbjMdbjug?t=1580
+##|Basic Arrays
+Sum of Array Elements|b||sum-of-array-elements|sum-of-array
+Count of odd numbers in Array|b||count-of-odd-numbers-in-array|odd-elements-in-an-array
+Check if the Array is Sorted I|b||check-if-the-array-is-sorted-i|check-if-an-array-is-sorted-in-ascending-order
+Reverse an array|b||reverse-an-array||twuC1F6gLI8
+##|Basic Hashing
+Highest Occurring Element in an Array|c|frequency-of-the-most-frequent-element|highest-occurring-element-in-an-array|highest-freq-element
+Second Highest Occurring Element|c||second-highest-occurring-element|second-highest-occurring-element
+Sum of Highest and Lowest Frequency|c||sum-of-highest-and-lowest-frequency
+##|Basic Strings
+Reverse a String II|b|reverse-string|reverse-a-string-ii
+Palindrome Check|c|valid-palindrome|palindrome-check|valid-palindrome
+Largest Odd Number in a String|c|largest-odd-number-in-string|largest-odd-number-in-a-string
+Longest Common Prefix|c|longest-common-prefix|longest-common-prefix
+Isomorphic Strings|b|isomorphic-strings|isomorphic-string
+Rotate String|c|rotate-string|rotate-string
+Valid Anagram|b|valid-anagram|valid-anagram|check-if-two-strings-are-anagrams
+Sort Characters by Frequency|c|sort-characters-by-frequency|sort-characters-by-frequency|sort-characters-by-frequency
+##|Basic Recursion
+Recursion Theory|c|||||recursion-theory@basic-recursion
+Recursion Concepts with Parameters|c|||||recursion-concepts-with-parameters@basic-recursion
+Sum of First N Numbers|b||sum-of-first-n-numbers||69ZCDFy-OUo
+Factorial of a Given Number|b||factorial-of-a-given-number-ii|factorial-of-a-number-using-recursion
+Sum of Array Elements II|b||sum-of-array-elements-ii
+Reverse a String I|b|reverse-string|reverse-a-string-i
+Check if String is Palindrome or Not|b|valid-palindrome|check-if-string-is-palindrome-or-not-|check-whether-a-string-is-a-palindrome|twuC1F6gLI8
+Check if a Number is Prime or Not|c||check-if-a-number-is-prime-or-not
+Reverse an array 2|c||reverse-an-array-ii|reversing-an-array-using-recursion
+Check if the Array is Sorted II|b|check-if-array-is-sorted-and-rotated|check-if-the-array-is-sorted-ii|check-if-an-array-is-sorted-in-ascending-order|37E9ckMDdTk?t=17224
+Sum of Digits in a Given Number|b||sum-of-digits-in-a-given-number|sum-of-digits-of-a-number-using-recursion
+Fibonacci Number|c|fibonacci-number|fibonacci-number||kvRjNm4rVBE
+#|Sorting
+##|Algorithms
+Selection Sort|c||selection-sort|selection-sort-algorithm|HGk_ypEuS24?t=167
+Bubble Sort|c||bubble-sort|bubble-sort-algorithm|HGk_ypEuS24?t=1061
+Insertion Sorting|c||insertion-sorting|insertion-sort-algorithm|HGk_ypEuS24?t=1900
+Merge Sorting|c||merge-sorting|merge-sort-algorithm|ogjf7ORKfd8
+Quick Sorting|c||quick-sorting|quick-sort-algorithm|WIrA4YexLRQ
+Recursive Bubble Sort|c||recursive-bubble-sort
+Recursive Insertion Sort|c||recursive-insertion-sort
+#|Arrays
+##|Fundamentals
+Linear Search|b||linear-search|linear-search-algorithm|wvcQg43_V8U?t=2465
+Largest Element|b||largest-element|find-the-largest-element-in-an-array|37E9ckMDdTk?t=526
+Second Largest Element|b||second-largest-element|second-largest-element|37E9ckMDdTk?t=810
+Maximum Consecutive Ones|b|max-consecutive-ones|maximum-consecutive-ones|maximum-consecutive-ones-in-a-binary-array|bYWLJb3vCWY?t=1124
+Left Rotate Array by One|b|rotate-array|left-rotate-array-by-one|left-rotate-array-by-one|wvcQg43_V8U?t=61
+Left Rotate Array by K Places|c|rotate-array|left-rotate-array|left-rotate-array-by-k-places|wvcQg43_V8U?t=485
+##|Logic Building
+Move Zeros to End|b|move-zeroes|move-zeros-to-end|move-zeros-to-the-end-of-an-array|wvcQg43_V8U?t=1633
+Remove duplicates from sorted array|b|remove-duplicates-from-sorted-array|remove-duplicates-from-sorted-array|remove-duplicates-from-a-sorted-array-in-place|37E9ckMDdTk?t=1887
+Find missing number|b|missing-number|find-missing-number|missing-number-solutions
+Union of two sorted arrays|c||union-of-two-sorted-arrays|union-of-two-sorted-arrays|wvcQg43_V8U?t=2584
+Intersection of two sorted arrays|c||intersection-of-two-sorted-arrays|intersection-of-two-arrays
+##|FAQs(Medium)
+Majority Element-I|c|majority-element|majority-element-i|majority-element-n-by-2|nP_ns3uSh80
+Leaders in an Array|c|buildings-with-an-ocean-view|leaders-in-an-array|leaders-in-an-array|cHrH9CQ8pmY
+Rearrange array elements by sign|c|rearrange-array-elements-by-sign|rearrange-array-elements-by-sign||h4aBagy4Uok
+Print the matrix in spiral manner|c|spiral-matrix|print-the-matrix-in-spiral-manner|spiral-traversal-of-a-matrix|3Zv-s9UUrFM
+Pascal's Triangle I|c|pascals-triangle|pascals-triangle-i|pascals-triangle-first-n-rows|bR7mQgwQ_o8
+Pascal's Triangle II|c|pascals-triangle-ii|pascals-triangle-ii|pascal-triangle-ii
+Pascal's Triangle III|c||pascals-triangle-iii|pascals-triangle-first-n-rows
+Rotate matrix by 90 degrees|c|rotate-image|rotate-matrix-by-90-degrees|rotate-matrix-90-degrees-clockwise|Z0R2u6gd3GU
+Set Matrix Zeroes|c|set-matrix-zeroes|set-matrix-zeroes|set-matrix-zeroes|N0MgLvceX7M
+Two Sum|b|two-sum|two-sum|two-sum|UXDSeD9mN-k
+3 Sum|c|3sum|3-sum|3sum|DhFh8Kw7ymk
+4 Sum|p|4sum|4-sum|4sum|eD95WRfh81c
+Sort an array of 0's 1's and 2's|c|sort-colors|sort-an-array-of-0's-1's-and-2's|sort-array-0s-1s-2s|tp8JIuCXBaU
+Kadane's Algorithm|c|maximum-subarray|kadane's-algorithm||AHZpyENo7k4
+Next Permutation|c|next-permutation|next-permutation|next-permutation|JDOXKqF60RQ
+##|FAQs(Hard)
+Majority Element-II|c|majority-element-ii|majority-element-ii|majority-element-ii-n-by-3|vwZj1K0e9U8
+Find the repeating and missing number|c||find-the-repeating-and-missing-number|find-the-missing-and-repeating-numbers-in-an-array|2D0D8HE6uak
+Count Inversions|p||count-inversions|count-inversions-in-an-array-using-merge-sort|AseUmwVNaoY
+Reverse Pairs|p|reverse-pairs|reverse-pairs|count-reverse-pairs|0e4bZaP3MDI
+Maximum Product Subarray in an Array|c|maximum-product-subarray|maximum-product-subarray-in-an-array|maximum-product-subarray
+Merge two sorted arrays without extra space|c|merge-sorted-array|merge-two-sorted-arrays-without-extra-space||n7uwj04E0I4
+#|Hashing
+##|Theory
+Basic Hashing|b||||KEs5UyBJ39g|basic-hashing@theory
+##|FAQs
+Longest Consecutive Sequence in an Array|c|longest-consecutive-sequence|longest-consecutive-sequence-in-an-array|longest-consecutive-sequence-in-an-array|oO5uLE7EUlM
+Longest subarray with sum K|c|maximum-size-subarray-sum-equals-k|longest-subarray-with-sum-k||frf7qxiN2qU
+Largest Subarray with Sum 0|c|maximum-size-subarray-sum-equals-k|largest-subarray-with-sum-0||xmguZ6GbatA
+Count subarrays with given sum|c|subarray-sum-equals-k|count-subarrays-with-given-sum|count-subarrays-with-given-sum|xvNwoz-ufXA
+Count subarrays with given xor K|p||count-subarrays-with-given-xor-k|count-subarrays-with-a-given-xor-k|eZr-6p0B7ME
+#|Binary Search
+##|Fundamentals
+Search X in sorted array|b|binary-search|search-x-in-sorted-array|binary-search-algorithm|MHf6awe89xw
+Lower Bound|c||lower-bound-|lower-bound-in-sorted-array|6zhGS79oQ4k
+Upper Bound|c||upper-bound|upper-bound-in-sorted-array|6zhGS79oQ4k
+##|Logic Building
+Search insert position|b|search-insert-position|search-insert-position|search-insert-position|6zhGS79oQ4k
+Floor and Ceil in Sorted Array|c||floor-and-ceil-in-sorted-array||6zhGS79oQ4k
+First and last occurrence|c|find-first-and-last-position-of-element-in-sorted-array|first-and-last-occurrence|last-occurrence-in-a-sorted-array|hjR1IYVx9lY
+Search in rotated sorted array-I|c|search-in-rotated-sorted-array|search-in-rotated-sorted-array-i|search-in-rotated-sorted-array|r3pMQ8-Ad5s
+Search in rotated sorted array-II|c|search-in-rotated-sorted-array-ii|search-in-rotated-sorted-array-2|search-in-rotated-sorted-array-ii|w2G2W8l__pc
+Find minimum in Rotated Sorted Array|c|find-minimum-in-rotated-sorted-array|find-minimum-in-rotated-sorted-array|find-minimum-in-rotated-sorted-array|nhEMDKMB44g
+Find out how many times the array is rotated|c||find-out-how-many-times-the-array-is-rotated|rotation-count-sorted-array|jtSiWTPLwd0
+Single element in sorted array|c|single-element-in-a-sorted-array|single-element-in-sorted-array|single-element-in-a-sorted-array|AZOmHuHadxQ
+Count Occurrences in a Sorted Array|c||count-occurrences-in-a-sorted-array|count-occurrences-in-a-sorted-array|hjR1IYVx9lY
+##|On answers
+Find square root of a number|c|sqrtx|find-square-root-of-a-number||Bsv3FPUX_BA
+Find Nth root of a number|c||find-nth-root-of-a-number||WjpswYrS2nY
+Find the smallest divisor|c|find-the-smallest-divisor-given-a-threshold|find-the-smallest-divisor|find-the-smallest-divisor-given-a-threshold|UvBKTVaG6U8
+Koko eating bananas|p|koko-eating-bananas|koko-eating-bananas|koko-eating-bananas|qyfekrNni90
+Minimum days to make M bouquets|p|minimum-number-of-days-to-make-m-bouquets|minimum-days-to-make-m-bouquets|minimum-days-to-make-m-bouquets|TXAuxeYBTdg
+Capacity to Ship Packages Within D Days|p|capacity-to-ship-packages-within-d-days|capacity-to-ship-packages-within-d-days|capacity-to-ship-packages-within-d-days|MG-Ac4TAvTY
+Kth Missing Positive Number|p|kth-missing-positive-number|kth-missing-positive-number||uZ0N_hZpyps
+Painter's Partition|p|split-array-largest-sum|painters-partition||thUd_WJn6wk
+##|FAQs
+Aggressive Cows|p||aggressive-cows|aggressive-cows|R_Mfw4ew-Vo
+Book Allocation Problem|p|split-array-largest-sum|book-allocation-problem|book-allocation-problem|gYmWHvRHu-s
+Find peak element|c|find-peak-element|find-peak-element|find-a-peak-element-in-an-array|cXxmbemS6XM
+Median of 2 sorted arrays|p|median-of-two-sorted-arrays|median-of-2-sorted-arrays|median-of-2-sorted-arrays|NTop3VTjmxk
+Kth element of 2 sorted arrays|p||kth-element-of-2-sorted-arrays|kth-element-of-two-sorted-arrays|nv7F4PiLUzo
+Minimize Max Distance to Gas Station|p|minimize-max-distance-to-gas-station|minimise-max-distance-to-gas-stations|minimize-maximum-distance-between-gas-stations|kMSBvlZ-_HA
+Split array - largest sum|p|split-array-largest-sum|split-array---largest-sum|split-array-largest-sum|thUd_WJn6wk
+##|2D Arrays
+Find row with maximum 1's|c||find-row-with-maximum-1's|find-the-row-with-maximum-1s-in-a-sorted-binary-matrix|SCz-1TtYxDI
+Search in a 2D Matrix|c|search-a-2d-matrix|search-in-a-2d-matrix|search-in-sorted-2d-matrix|ZYpYur0znng
+Search in 2D matrix - II|c|search-a-2d-matrix-ii|search-in-2d-matrix-ii|search-in-a-row-and-column-wise-sorted-matrix|9ZbB397jU4k
+Find Peak Element - II|c|find-a-peak-element-ii|find-peak-element-ii|find-peak-element-2d-matrix|nGGp5XBzC4g
+Matrix Median|p|median-of-a-row-wise-sorted-matrix|matrix-median|median-of-a-row-wise-sorted-matrix|Q9wXgdxJq48
+#|Strings (Basic and Medium)
+##|Parentheses
+Remove Outermost Parentheses|c|remove-outermost-parentheses|remove-outermost-parentheses
+Maximum Nesting Depth of the Parentheses|c|maximum-nesting-depth-of-the-parentheses|maximum-nesting-depth-of-the-parentheses
+##|String Conversions
+Roman to Integer|b|roman-to-integer|roman-to-integer
+String to Integer (atoi)|c|string-to-integer-atoi|string-to-integer-atoi
+##|Substring Problems
+Count Number of Substrings|||count-number-of-substring
+Longest Palindromic Substring|c|longest-palindromic-substring|longest-palindromic-substring
+Sum of Beauty of All Substrings|c|sum-of-beauty-of-all-substrings|sum-of-beauty-of-all-substrings
+#|Recursion
+##|Implementation Problems
+Pow(x,n)|c|powx-n|pow(x%2Cn)||l0YC3876qxg
+Generate Parentheses|c|generate-parentheses|generate-parentheses
+Power Set|c|subsets|power-set||b7AYbpM5YrE
+Count Good Numbers|c|count-good-numbers|count-good-numbers|count-good-numbers
+Reverse a Stack|c||reverse-a-stack
+##|Subsequence Pattern Problems
+Learn All Patterns of Subsequences (Theory)|||||eQCS_v3bw0Q|learn-all-patterns-of-subsequences@subsequence-pattern-problems
+Check if there exists a subsequence with sum K|c||check-if-there-exists-a-subsequence-with-sum-k
+Count all subsequences with sum K|c||count-all-subsequences-with-sum-k
+Generate Binary Strings Without Consecutive 1s|c||generate-binary-strings-without-consecutive-1s
+##|FAQs (Medium)
+Combination Sum|c|combination-sum|combination-sum||OyZFFqQtu98
+Combination Sum II|c|combination-sum-ii|combination-sum-ii||G1fRTGRxXU8
+Subsets I|c|subsets|subsets-i||rYkfBRtMJr8
+Subsets II|c|subsets-ii|subsets-ii||RIn3gOkbhQE
+Combination Sum III|p|combination-sum-iii|combination-sum-iii
+##|Hard
+Letter Combinations of a Phone Number|p|letter-combinations-of-a-phone-number|letter-combinations-of-a-phone-number
+##|FAQs (Hard)
+Palindrome partitioning|p|palindrome-partitioning|palindrome-partitioning||_H8V5hJUGd0
+Word Search|p|word-search|word-search
+N Queen|p|n-queens|n-queen||i05Ju7AftcM
+Rat in a Maze|p||rat-in-a-maze||bLGZhJlt4y0
+M Coloring Problem|p||m-coloring-problem||wuVwUK25Rfc
+Sudoku Solver|p|sudoku-solver|sudoko-solver||FWAIf_EVUKE
+Expression Add Operators|p|expression-add-operators|expression-add-operators
+#|Linked-List
+##|Fundamentals (Single LL)
+Introduction to Singly LinkedList|b||||Nq7ok-OyEpg|introduction-to-singly-linkedlist@fundamentals-single-ll
+Traversal in Linked List|b||traversal-in-linked-list
+Deletion in Linked List|c|||||deletion-in-linked-list@fundamentals-single-ll
+Insertion in Linked List|c|||||insertion-in-linked-list@fundamentals-single-ll
+Deletion of the head of LL|c|delete-node-in-a-linked-list|deletion-of-the-head-of-ll||VaECK03Dz-g
+Deletion of the tail of Linked List|c||deletion-of-the-tail-of-ll
+Deletion of the Kth element of Linked List|c||deletion-of-the-kth-element-of-ll
+Delete the element with value X|c||delete-the-element-with-value-x
+Insertion at the head of Linked List|c||insertion-at-the-head-of-ll|insert-a-node-at-the-beginning-of-a-singly-linked-list|VaECK03Dz-g&t=1934
+Insertion at the tail of Linked List|c||insertion-at-the-tail-of-ll
+Insertion at the Kth position of Linked List|c||insertion-at-the-kth-position-of-ll|insert-node-at-kth-position-in-linked-list
+Insertion before the value X in Linked List|c||insertion-before-the-value-x-in-ll|insert-node-before-value-x-in-linked-list
+Find the length of the Linked List|b||find-the-length-of-the-linked-list||Nq7ok-OyEpg&t=2240
+Search in Linked List|c||search-in-linked-list||Nq7ok-OyEpg&t=2524
+##|Fundamentals (Doubly LL)
+Introduction to Doubly LL|b||||0eKMU10uEDI|introduction-to-doubly-ll@fundamentals-doubly-ll
+Deletion in Doubly LL|c|||||deletion-in-doubly-ll@fundamentals-doubly-ll
+Insertion in DLL|c|||||insertion-in-dll@fundamentals-doubly-ll
+Convert Array to Doubly Linked List|c||convert-array-to-dll
+Delete Tail of Doubly Linked List|c||delete-tail-of-dll
+Delete Kth Element of Doubly Linked List|c||delete-kth-element-of-dll
+Removing given node in Doubly Linked List|c||removing-given-node-in-dll
+Insert node before head in Doubly Linked List|c||insert-node-before-head-in-dll||0eKMU10uEDI&t=2684
+Insert node before tail in Doubly Linked List|c||insert-node-before-tail-in-dll
+Insert node before (kth node) in Doubly Linked List|c||insert-node-before-kth-node-in-dll
+Insert before given node in Doubly Linked List|c||insert-before-given-node-in-dll
+Delete head of Doubly Linked List|c||delete-head-of-dll||0eKMU10uEDI&t=853
+Reverse a Doubly Linked List|c|reverse-linked-list|reverse-a-doubly-linked-list||u3WUW2qe6ww
+##|Logic Building
+Add two numbers in Linked List|c|add-two-numbers|add-two-numbers-in-ll|add-two-numbers-linked-lists-reverse-order|LBVsXSMOIk4
+Segregate odd and even nodes in Linked List|c|odd-even-linked-list|segregate-odd-and-even-nodes-in-ll|segregate-odd-and-even-nodes-in-linked-list|qf6qp7GzD5Q
+Sort a Linked List of 0's 1's and 2's|c||sort-a-ll-of-0's-1's-and-2's|sort-linked-list-0s-1s-2s-changing-links|gRII7LhdJWc
+Remove Nth node from the back of the LL|c|remove-nth-node-from-end-of-list|remove-nth-node-from-the-back-of-the-ll|remove-the-nth-node-from-the-end-of-a-linked-list|3kMKYQ2wNIU
+Reverse a LL|c|reverse-linked-list|reverse-a-ll|reverse-a-singly-linked-list|D2vI2DNJGd8
+##|FAQs (Medium)
+Add one to a number represented by LL|c|plus-one-linked-list|add-one-to-a-number-represented-by-ll|add-one-to-number-linked-list|aXQWhbvT3w0
+Find Middle of Linked List|b|middle-of-the-linked-list|find-middle-of-linked-list|find-middle-of-linked-list|7LjQ57RqgEc
+Delete the middle node in LL|c|delete-the-middle-node-of-a-linked-list|delete-the-middle-node-in-ll|delete-the-middle-node-of-a-linked-list|ePpV-_pfOeI
+Check if LL is palindrome or not|c|palindrome-linked-list|check-if-ll-is-palindrome-or-not|check-if-a-linked-list-is-a-palindrome|lRY_G-u_8jk
+Find the intersection point of Y LL|c|intersection-of-two-linked-lists|find-the-intersection-point-of-y-ll|intersection-of-two-linked-lists|0DYoPz2Tpt4
+Detect a loop in LL|c|linked-list-cycle|detect-a-loop-in-ll|detect-cycle-linked-list|wiOo4DC5GGA
+Find the starting point in LL|c|linked-list-cycle-ii|find-the-starting-point-in-ll|find-start-of-cycle-linked-list|2Kd0KKmmHFc
+Length of loop in LL|c||length-of-loop-in-ll|length-of-cycle-linked-list|I4g1qbkTPus
+##|FAQs (Hard)
+Reverse LL in group of given size K|p|reverse-nodes-in-k-group|reverse-ll-in-group-of-given-size-k|reverse-linked-list-k-groups|lIar1skcQYI
+Rotate a LL|c|rotate-list|rotate-a-ll|rotate-linked-list-right-k-places|uT7YI7XbTY8
+Merge two Sorted Lists|c|merge-two-sorted-lists|merge-sorted-lists-|merge-two-sorted-linked-lists|Xb4slcp1U38
+Flattening of LL|p|merge-k-sorted-lists|flattening-of-ll|flatten-linked-list|ykelywHJWLg
+Sort LL|c|sort-list|sort-ll|sort-a-linked-list-using-merge-sort|8ocB7a_c-Cc
+Clone a LL with random and next pointer|p|copy-list-with-random-pointer|clone-a-ll-with-random-and-next-pointer|clone-linked-list-random-pointer|q570bKdrnlw
+##|FAQS (DLL)
+Delete all occurrences of a key in DLL|c||delete-all-occurrences-of-a-key-in-dll|delete-all-occurrences-of-a-key-in-a-doubly-linked-list|Mh0NH_SD92k
+Remove duplicates from sorted DLL|c||remove-duplicated-from-sorted-dll|remove-duplicates-from-a-sorted-doubly-linked-list|YJKVTnOJXSY
+Find Pairs with Given Sum in Doubly Linked List|c||find-pairs-with-given-sum-in-doubly-linked-list|find-pairs-with-given-sum-in-doubly-linked-list|YitR4dQsddE
+#|Bit Manipulation
+##|Theory
+Introduction to Bits and Tricks|b||||qQd-ViW7bfk|introduction-to-bits-and-tricks@theory
+##|Bit Fundamentals
+Check if the i-th bit is Set or Not|b||check-if-the-i-th-bit-is-set-or-not||nttpF8kwgd4
+Check if a Number is Odd or Not|b||check-if-a-number-is-odd-or-not|check-even-or-odd|nttpF8kwgd4
+Check if a Number is Power of 2 or Not|b|power-of-two|check-if-a-number-is-power-of-2-or-not||nttpF8kwgd4
+Count the Number of Set Bits|b|number-of-1-bits|count-the-number-of-set-bits||nttpF8kwgd4
+Set the Rightmost Unset Bit|||set-the-rightmost-unset-bit
+Swap Two Numbers|b||swap-two-numbers||nttpF8kwgd4
+##|Problems
+Minimum Bit Flips to Convert Number|b|minimum-bit-flips-to-convert-number|minimum-bit-flips-to-convert-number||OOdrmcfZXd8
+Single Number - I|b|single-number|single-number---i|single-number-i|bYWLJb3vCWY?t=1369
+Single Number - II|c|single-number-ii|single-number---ii|single-number-ii
+Single Number - III|p|single-number-iii|single-number---iii|single-number-iii|UA5JnV1J2sI
+Divide two numbers without multiplication and division|c|divide-two-integers|divide-two-numbers-without-multiplication-and-division|divide-two-integers-without-multiplication-division-modulo|pBD4B1tzgVc
+Power Set Bit Manipulation|c|subsets|power-set-bit-manipulation||LqKaUv1G3_I
+XOR of numbers in a given range|c||xor-of-numbers-in-a-given-range|xor-of-numbers-in-a-range-l-to-r|WqGb7159h7Q
+#|Greedy Algorithms
+##|Easy
+Assign Cookies|c|assign-cookies|assign-cookies|assign-cookies|DIX2p7vb9co
+Lemonade Change|c|lemonade-change|lemonade-change|lemonade-change|n_tmibEhO6Q
+Fractional Knapsack|c||fractional-knapsack||1ibsQrnuEEg
+Jump Game - I|c|jump-game|jump-game---i|jump-game|tZAa_jJ3SwQ
+##|Scheduling and Interval Problems
+Shortest Job First|c||shortest-job-first||3-QbX1iDbXs
+Job sequencing Problem|c||job-sequencing-problem|job-sequencing-problem|QbwltemZbRg
+N meetings in one room|c||n-meetings-in-one-room|n-meetings-in-one-room|mKfhTotEguk
+Non-overlapping Intervals|c|non-overlapping-intervals|non-overlapping-intervals|non-overlapping-intervals|HDHQ8lAWakY
+Insert Interval|c|insert-interval|insert-interval|insert-interval|xxRE-46OCC8
+Merge Intervals|c|merge-intervals|merge-intervals|merge-overlapping-intervals|2JzRBPFYbKE
+Minimum number of platforms required for a railway|c|divide-intervals-into-minimum-number-of-groups|minimum-number-of-platforms-required-for-a-railway|minimum-platforms-required-for-a-railway-station|AsGzwR_FWok
+##|Hard
+Valid Paranthesis Checker|p|valid-parenthesis-string|valid-paranthesis-checker||cHT6sG_hUZI
+Candy|p|candy|candy|candy-distribution-problem|IIqVFvKE6RY
+Jump Game II|p|jump-game-ii|jump-game-ii|jump-game-ii-minimum-jumps|7SBVnw7GSTk
+#|Sliding Window / 2 Pointer
+##|Pattern and Template
+Theory|c|||||theory@pattern-and-template
+##|Constant Window
+Maximum Points You Can Obtain from Cards|c|maximum-points-you-can-obtain-from-cards|maximum-points-you-can-obtain-from-cards-|maximum-points-you-can-obtain-from-cards|pBWCOCS636U
+##|Longest and Smallest Window Problems
+Longest Substring Without Repeating Characters|c|longest-substring-without-repeating-characters|longest-substring-without-repeating-characters|longest-substring-without-repeating-characters|-zSxTJkcdAo
+Max Consecutive Ones III|c|max-consecutive-ones-iii|max-consecutive-ones-iii|max-consecutive-ones-iii|3E4JBHSLpYk
+Fruit Into Baskets|c|fruit-into-baskets|fruit-into-baskets|fruit-into-baskets|e3bs0uA1NhQ
+Longest Substring With At Most K Distinct Characters|p|longest-substring-with-at-most-k-distinct-characters|longest-substring-with-at-most-k-distinct-characters|longest-substring-with-at-most-k-distinct-characters|teM9ZsVRQyc
+Longest Repeating Character Replacement|p|longest-repeating-character-replacement|longest-repeating-character-replacement|longest-repeating-character-replacement|_eNhaDCr6P0
+Minimum Window Substring|p|minimum-window-substring|minimum-window-substring-|minimum-window-substring|WJaij9ffOIY
+Minimum Window Subsequence|p|minimum-window-subsequence|minimum-window-subsequence
+##|Counting Subarrays / Substrings Problems
+Number of Substrings Containing All Three Characters|c|number-of-substrings-containing-all-three-characters|number-of-substrings-containing-all-three-characters|count-substrings-containing-all-three-characters-a-b-and-c|xtqN4qlgr8s
+Binary Subarrays With Sum|c|binary-subarrays-with-sum|binary-subarrays-with-sum|binary-subarrays-with-sum|XnMdNUkX6VM
+Count number of Nice subarrays|p|count-number-of-nice-subarrays|count-number-of-nice-subarrays|count-nice-subarrays|j_QOv9OT9Og
+Subarrays with K Different Integers|p|subarrays-with-k-different-integers|subarrays-with-k-different-integers||7wYGbV_LsX4
+#|Stack / Queues
+##|Implementation
+Implementation using different DS|c|||||implementation-using-different-ds@implementation
+Implement Stack using Arrays|c||implement-stack-using-arrays|implement-a-stack-using-an-array|tqQ5fTamIN4
+Implement Queue using Arrays|c||implement-queue-using-arrays|implement-a-queue-using-an-array|tqQ5fTamIN4
+Implement Stack using Queue|c|implement-stack-using-queues|implement-stack-using-queue||tqQ5fTamIN4
+Implement Queue using Stack|c|implement-queue-using-stacks|implement-queue-using-stack|implement-a-queue-using-stacks|tqQ5fTamIN4
+Implement stack using Linkedlist|c||implement-stack-using-linkedlist|implement-a-stack-using-a-linked-list|tqQ5fTamIN4
+Implement queue using Linkedlist|c||implement-queue-using-linkedlist||tqQ5fTamIN4
+Balanced Paranthesis|c|valid-parentheses|balanced-paranthesis|check-balanced-parentheses-using-a-stack|xwjS0iZhw4I
+##|Prefix, Infix and Postfix Conversions
+Infix to Postfix Conversion|c||infix-to-postfix-conversion||4pIc9UBHJtk
+Infix to Prefix Conversion|c||infix-to-prefix-conversion||4pIc9UBHJtk
+Prefix to Infix Conversion|c||prefix-to-infix-conversion||4pIc9UBHJtk
+Prefix to Postfix Conversion|c||prefix-to-postfix-conversion||4pIc9UBHJtk
+Postfix to Infix Conversion|c||postfix-to-infix-conversion||4pIc9UBHJtk
+Postfix to Prefix Conversion|c||postfix-to-prefix-conversion||4pIc9UBHJtk
+##|Monotonic Stack
+Next Greater Element|c|next-greater-element-i|next-greater-element||e7XQLtOQM3I
+Next Greater Element - 2|c|next-greater-element-ii|next-greater-element---2||7PrncD7v9YQ
+Asteroid Collision|c|asteroid-collision|asteroid-collision|asteroid-collision|_eYGqw_VDR4
+Sum of Subarray Minimums|c|sum-of-subarray-minimums|sum-of-subarray-minimums||v0e8p9JCgRc
+Sum of Subarray Ranges|c|sum-of-subarray-ranges|sum-of-subarray-ranges||gIrMptNPf5M
+Remove K Digits|c|remove-k-digits|remove-k-digits||jmbuRzYPGrg
+Next Smaller Element|c||next-smaller-element
+##|FAQs
+Implement Min Stack|c|min-stack|implement-min-stack||NdDIaH91P0g
+Sliding Window Maximum|p|sliding-window-maximum|sliding-window-maximum||NwBvene4Imo
+Trapping Rainwater|p|trapping-rain-water|trapping-rainwater|trapping-rain-water|1_5VuquLbXg
+Largest rectangle in a histogram|p|largest-rectangle-in-histogram|largest-rectangle-in-a-histogram|largest-rectangle-in-histogram|Bzat9vgD0fs
+Maximum Rectangles|p|maximal-rectangle|maximum-rectangles||tOylVCugy9k
+Stock span problem|c|online-stock-span|stock-span-problem|stock-span-problem|eay-zoSRkVc
+Celebrity Problem|c|find-the-celebrity|celebrity-problem||cEadsbTeze4
+LRU Cache|p|lru-cache|lru-cache||z9bJUPxzFOw
+LFU Cache|p|lfu-cache|lfu-cache||0PSB9y8ehbk
+Number of Greater Elements to the Right|c||number-of-greater-elements-to-the-right
+#|Binary Trees
+##|Theory/Traversals
+Introduction|b||||_ANrF3FJm7I|introduction-@theory-and-traversals
+Inorder Traversal|b|binary-tree-inorder-traversal|inorder-traversal||lxTGsVXjwvM
+Preorder Traversal|b|binary-tree-preorder-traversal|preorder-traversal||RlUu72JrOCQ
+Postorder Traversal|b|binary-tree-postorder-traversal|postorder-traversal||2YBhNLodD8Q
+Level Order Traversal|c|binary-tree-level-order-traversal|level-order-traversal|binary-tree-level-order-traversal|EoAsWbO7sqg
+Pre, Post, Inorder in one traversal|c||pre%2C-post%2C-inorder-in-one-traversal||ySp2epYvgTE
+##|Medium Problems
+Maximum Depth in BT|c|maximum-depth-of-binary-tree|maximum-depth-in-bt||eD3tmO66aBA
+Check if two trees are identical or not|c|same-tree|check-if-two-trees-are-identical-or-not|check-identical-binary-trees|BhuvF_-PWS0
+Check for balanced binary tree|c|balanced-binary-tree|check-for-balanced-binary-tree|check-if-a-binary-tree-is-height-balanced|Yt50Jfbd8Po
+Diameter of Binary Tree|c|diameter-of-binary-tree|diameter-of-binary-tree|diameter-of-a-binary-tree|Rezetez59Nk
+Maximum path sum|p|binary-tree-maximum-path-sum|maximum-path-sum-|binary-tree-maximum-path-sum|WszrfSwMz58
+Check for symmetrical BTs|c|symmetric-tree|check-for-symmetrical-bts|symmetric-binary-tree|nKggNAiEpBE
+Children Sum Property in Binary Tree|c||children-sum-property-in-binary-tree||fnmisPM6cVo
+##|FAQs
+Zig Zag or Spiral Traversal|c|binary-tree-zigzag-level-order-traversal|zig-zag-or-spiral-traversal||3OXWEdlIGl4
+Boundary Traversal|c|boundary-of-binary-tree|boundary-traversal|boundary-traversal-of-a-binary-tree|0ca1nvR0be4
+Vertical Order Traversal|p|vertical-order-traversal-of-a-binary-tree|vertical-order-traversal|vertical-order-traversal-of-a-binary-tree|q_a6lpbKJdw
+Top View of BT|c||top-view-of-bt|top-view-of-binary-tree|Et9OCDNvJ78
+Bottom view of BT|c||bottom-view-of-bt|bottom-view-of-binary-tree|0FtVY6I4pB8
+Right/Left View of BT|c|binary-tree-right-side-view|right-left-view-of-bt|left-and-right-views-of-a-binary-tree|KV4mRzTjlAk
+Print root to leaf path in BT|c||print-root-to-leaf-path-in-bt|print-root-to-leaf-path-in-binary-tree|fmflMqVOC7k
+LCA in BT|p|lowest-common-ancestor-of-a-binary-tree|lca-in-bt|lowest-common-ancestor-in-a-binary-tree|_-QHfMDde90
+Maximum Width of BT|p|maximum-width-of-binary-tree|maximum-width-of-bt||ZbybYvcVLks
+Print all nodes at a distance of K in BT|p|all-nodes-distance-k-in-binary-tree|print-all-nodes-at-a-distance-of-k-in-bt|nodes-distance-k-binary-tree|i9ORlEy6EsI
+Minimum time taken to burn the BT from a given Node|p||minimum-time-taken-to-burn-the-bt-from-a-given-node|minimum-time-burn-binary-tree|2r5wLmQfD6g
+Count total nodes in a complete BT|c|count-complete-tree-nodes|count-total-nodes-in-a-complete-bt|count-nodes-in-a-complete-binary-tree|u-yWemKGWO0
+Flatten Binary Tree to Linked List|p|flatten-binary-tree-to-linked-list|flatten-binary-tree-to-linked-list|flatten-binary-tree-to-linked-list|sWf7k1x9XR4
+##|Construction Problems
+Requirements needed to construct a unique BT|c||requirements-needed-to-construct-a-unique-bt|requirements-needed-to-construct-a-unique-binary-tree|9GMECGQgWrQ
+Construct a BT from Preorder and Inorder|c|construct-binary-tree-from-preorder-and-inorder-traversal|construct-a-bt-from-preorder-and-inorder|construct-a-binary-tree-from-preorder-and-inorder|aZNaLrVebKQ
+Construct a BT from Postorder and Inorder|c|construct-binary-tree-from-inorder-and-postorder-traversal|construct-a-bt-from-postorder-and-inorder||LgLRTaEMRVc
+Serialize and De-serialize BT|p|serialize-and-deserialize-binary-tree|serialize-and-de-serialize-bt|serialize-and-deserialize-a-binary-tree|-YbXySKJsX8
+##|Traversal in Constant Space
+Morris Inorder Traversal|p|binary-tree-inorder-traversal|morris-inorder-traversal-|morris-inorder-traversal|80Zug6D1_r4
+Morris Preorder Traversal|p|binary-tree-preorder-traversal|morris-preorder-traversal-|morris-preorder-traversal|80Zug6D1_r4
+#|Binary Search Trees
+##|Theory and Basics
+Introduction to BST|b||||p7-9UvDQZ3w|introduction-to-bst@theory-and-basics
+Search in BST|b|search-in-a-binary-search-tree|search-in-bst|search-in-a-binary-search-tree|KcNt6v_56cc
+Floor and Ceil in a BST|c||floor-and-ceil-in-a-bst|floor-and-ceil-in-a-bst|xm_W1ub-K-w
+Minimum and Maximum in BST|||minimum-and-maximum-in-bst
+##|Medium
+Insert a given node in BST|c|insert-into-a-binary-search-tree|insert-a-given-node-in-bst|insert-into-a-binary-search-tree|FiFiNvM29ps
+Delete a node in BST|c|delete-node-in-a-bst|delete-a-node-in-bst|delete-node-in-a-bst|kouxiP_H5WE
+Kth Smallest and Largest element in BST|c|kth-smallest-element-in-a-bst|kth-smallest-and-largest-element-in-bst|kth-smallest-and-largest-elements-in-a-bst|9TJYWh0adfk
+Check if a tree is a BST or not|c|validate-binary-search-tree|check-if-a-tree-is-a-bst-or-not|validate-binary-search-tree|f-sj7I5oXEI
+LCA in BST|c|lowest-common-ancestor-of-a-binary-search-tree|lca-in-bst|lowest-common-ancestor-of-a-binary-search-tree|cX_kPV_foZc
+Construct a BST from a preorder traversal|c|construct-binary-search-tree-from-preorder-traversal|construct-a-bst-from-a-preorder-traversal|construct-a-bst-from-preorder-traversal|UmJT3j26t1I
+Inorder successor and predecessor in BST|c|inorder-successor-in-bst|inorder-successor-and-predecessor-in-bst|inorder-successor-and-predecessor-in-a-bst|SXKAD2svfmI
+##|FAQs
+BST iterator|c|binary-search-tree-iterator|bst-iterator|binary-search-tree-iterator|D2jMcmxU4bs
+Two sum in BST|c|two-sum-iv-input-is-a-bst|two-sum-in-bst|two-sum-in-bst|ssL3sHwPeb4
+Correct BST with two nodes swapped|p|recover-binary-search-tree|correct-bst-with-two-nodes-swapped|recover-binary-search-tree|ZWGW7FminDM
+Largest BST in Binary Tree|p|largest-bst-subtree|largest-bst-in-binary-tree|largest-bst-in-binary-tree|X0oXMdtUDwo
+#|Heaps
+##|Theory and Implementation
+Heaps (Theory Video)|c|||||heaps-theory@theory-and-implementation
+Heapify Algorithm|c||heapify-algorithm
+Build heap from a given Array|c||build-heap-from-a-given-array
+Implement Min Heap|c||implement-min-heap
+Implement Max Heap|c||implement-max-heap
+Check if an array represents a min heap|c||check-if-an-array-represents-a-min-heap-
+Convert Min Heap to Max Heap|c||convert-min-heap-to-max-heap
+Heap Sort|p||heap-sort|heap-sort
+K-th Largest element in an array|p|kth-largest-element-in-an-array|k-th-largest-element-in-an-array|k-th-largest-element-in-an-array
+##|FAQs
+Kth largest element in a stream of running integers|p|kth-largest-element-in-a-stream|kth-largest-element-in-a-stream-of-running-integers|kth-largest-element-stream
+Sort K sorted array||||||sort-k-sorted-array@faqs
+Merge K sorted Lists|p|merge-k-sorted-lists|merge-k-sorted-lists|merge-k-sorted-linked-lists
+Replace Elements by Their Rank|c|rank-transform-of-an-array|replace-elements-by-their-rank
+Task Scheduler|c|task-scheduler|task-scheduler
+Hand of Straights|c|hand-of-straights|hand-of-straights
+Design Twitter|c|design-twitter|design-twitter
+Minimum Cost to Connect Sticks|c|minimum-cost-to-connect-sticks|minimum-cost-to-connect-sticks
+Maximum Sum Combination|c||maximum-sum-combination
+Find Median from Data Stream|p|find-median-from-data-stream|find-median-from-data-stream|find-median-data-stream
+Top K Frequent Elements|c|top-k-frequent-elements|top-k-frequent-elements
+#|Graphs
+##|Theory and traversals
+Introduction to Graph|b||||3oI-34aPMWM|introduction-to-graph@theory-and-traversals
+Traversal Techniques|c||traversal-techniques||Qzf1a--rhp8
+Connected Components|c|number-of-connected-components-in-an-undirected-graph|connected-components
+##|Traversal Problems
+Number of provinces|c|number-of-provinces|number-of-provinces|number-of-provinces|ACzkVtewUYA
+Number of islands|c|number-of-islands|number-of-islands||muncqlKJrH0
+Flood fill algorithm|c|flood-fill|flood-fill-algorithm|flood-fill-algorithm
+Number of enclaves|c|number-of-enclaves|number-of-enclaves|number-of-enclaves|rxKcepXQgU4
+Rotten Oranges|c|rotting-oranges|rotten-oranges|rotting-oranges|yf3oUhkvqA0
+Distance of nearest cell having one|c|01-matrix|distance-of-nearest-cell-having-one|distance-of-the-nearest-cell-having-1-in-a-binary-matrix|edXdVwkYHF8
+Surrounded Regions|c|surrounded-regions|surrounded-regions|surrounded-regions|BtdgAys4yMk
+Number of distinct islands|c|number-of-distinct-islands|number-of-distinct-islands|number-of-distinct-islands
+##|Cycles
+Detect a cycle in an undirected graph|c|course-schedule|detect-a-cycle-in-an-undirected-graph|detect-a-cycle-in-an-undirected-graph|zQ3zgFypzX4
+Bipartite graph|c|is-graph-bipartite|bipartite-graph||KG5YFfR0j8A
+Topological sort or Kahn's algorithm|c||topological-sort-or-kahns-algorithm||5lZ0iJMrUMk
+Detect a cycle in a directed graph|c|course-schedule|detect-a-cycle-in-a-directed-graph|detect-a-cycle-in-a-directed-graph|uzVUw90ZFIg
+##|Hard Problems
+Find eventual safe states|p|find-eventual-safe-states|find-eventual-safe-states|find-eventual-safe-states|2gtg3VsDGyc
+Course Schedule I|p|course-schedule|course-schedule-i|course-schedule-i|WAOfKpxYHR8
+Course Schedule II|p|course-schedule-ii|course-schedule-ii|course-schedule-ii|WAOfKpxYHR8
+Alien Dictionary|p|alien-dictionary|alient-dictionary|alien-dictionary|U3N_je7tWAs
+Shortest path in DAG|c||shortest-path-in-dag|shortest-path-in-a-directed-acyclic-graph-dag|ZUFQfFaU-8U
+Shortest path in undirected graph with unit weights|c||shortest-path-in-undirected-graph-with-unit-weights|shortest-path-in-an-unweighted-undirected-graph-using-bfs|C4gxoTaI71U
+Word ladder I|p|word-ladder|word-ladder-i|word-ladder|tRPda0rcf8E
+Word ladder II|p|word-ladder-ii|word-ladder-ii|word-ladder-ii|AD4SFl7tu7I
+##|Shortest Path Algorithms
+Dijkstra's algorithm|c||dijkstra's-algorithm|dijkstras-algorithm|rp1SMw7HSO8
+Print Shortest Path|c||print-shortest-path-|print-shortest-path
+Shortest Distance in a Binary Maze|c|shortest-path-in-binary-matrix|shortest-path-with-minimum-effort|shortest-distance-binary-maze|U5Mw4eyUmw4
+Path with minimum effort|c|path-with-minimum-effort|path-with-minimum-effort|path-with-minimum-effort|0ytpZyiZFhA
+Cheapest flight within K stops|p|cheapest-flights-within-k-stops|cheapest-flight-within-k-stops|cheapest-flights-within-k-stops|9XybHVqTHcQ
+Minimum multiplications to reach end|p||minimum-multiplications-to-reach-end|minimum-multiplications-to-reach-end|_BvEJ3VIDWw
+Number of ways to arrive at destination|p|number-of-ways-to-arrive-at-destination|number-of-ways-to-arrive-at-destination|number-of-ways-to-arrive-at-destination|_-0mx0SmYxA
+Bellman ford algorithm|p||bellman-ford-algorithm|bellman-ford-algorithm|0vVofAhAYjc
+Floyd warshall algorithm|p||floyd-warshall-algorithm||YbY8cVwWAvw
+Find the city with the smallest number of neighbors|p|find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance|find-the-city-with-the-smallest-number-of-neighbors|find-city-smallest-number-neighbors-threshold-distance|9XybHVqTHcQ
+Network Delay Time|c|network-delay-time|network-delay-time|network-delay-time
+Swim in Rising Water|p|swim-in-rising-water|swim-in-rising-water
+##|Minimum Spanning Tree
+MST theory|c||||ZSPjZuZWCME|mst-theory@minimum-spanning-tree
+Disjoint Set|c||disjoint-set-|disjoint-set-union|aBxjDBC4M1U
+Find the MST weight|c|connecting-cities-with-minimum-cost|find-the-mst-weight|find-the-mst-weight|mJcZjjKzeqk
+##|Hard Problems II
+Number of operations to make network connected|c|number-of-operations-to-make-network-connected|number-of-operations-to-make-network-connected||FYrl7iz9_ZU
+Accounts merge|c|accounts-merge|accounts-merge||FMwpt_aQOGw
+Number of islands II|p|number-of-islands-ii|number-of-islands-ii||Rn6B-Q4SNyA
+Making a large island|p|making-a-large-island|making-a-large-island|making-a-large-island|lgiz0Oup6gM
+Most stones removed with same row or column|p|most-stones-removed-with-same-row-or-column|most-stones-removed-with-same-row-or-column|most-stones-removed-same-row-column|OwMNX8SPavM
+##|Additional Algorithms
+Kosaraju's algorithm|p|maximum-number-of-non-overlapping-substrings/discuss/766485/kosaraju-algorithm-on|kosaraju's-algorithm|kosarajus-algorithm|V8qIqJxCioo
+Bridges in graph|p|critical-connections-in-a-network|bridges-in-graph|bridges-in-graph-tarjan-algorithm|qrAub5z8FeA
+Articulation point in graph|p||articulation-point-in-graph|articulation-points-in-graph|j1QDfU21iZk
+#|Dynamic Programming
+##|Introduction
+Introduction to DP|b||||tyB0ztf0DNY|introduction-to-dp@introduction
+##|1D DP
+Climbing stairs|c|climbing-stairs|climbing-stairs|climbing-stairs|mLfjzJsN8us
+Frog Jump|c||frog-jump|frog-jump-minimum-energy|EgG3jsGoPvQ
+Frog jump with K distances|c||frog-jump-with-k-distances|frog-jump-with-k-distances|Kmh3rhyEtB8
+Maximum sum of non adjacent elements|c|house-robber|maximum-sum-of-non-adjacent-elements|maximum-sum-of-non-adjacent-elements|GrMBfJNk_NY
+House robber|c|house-robber|house-robber|house-robber-ii|3WaxQMELSkw
+##|2D DP
+Ninja's training|c||ninja's-training|ninjas-training|AE39gJYuRog
+##|DP on grids
+Grid unique paths|c|unique-paths|grid-unique-paths|grid-unique-paths|sdE0A2Oxofw
+Unique paths II|p|unique-paths-ii|unique-paths-ii|unique-paths-ii-obstacles|TmhpgXScLyY
+Minimum Falling Path Sum|c|minimum-falling-path-sum|minimum-falling-path-sum|minimum-falling-path-sum|_rgTlyky1uQ
+Triangle|c|triangle|triangle|triangle-minimum-path-sum|SrP-PiLSYC0
+Cherry pickup II|p|cherry-pickup-ii|cherry-pickup-ii
+Count Square Submatrices with All Ones||count-square-submatrices-with-all-ones|count-square-submatrices-with-all-one||auS1fynpnjo
+##|DP on stocks
+Best time to buy and sell stock|c|best-time-to-buy-and-sell-stock|best-time-to-buy-and-sell-stock|best-time-to-buy-and-sell-stock|excAOvwF_Wk
+Best time to buy and sell stock II|c|best-time-to-buy-and-sell-stock-ii|best-time-to-buy-and-sell-stock-ii|best-time-to-buy-and-sell-stock-ii|nGJmxkUJQGs
+Best time to buy and sell stock III|p|best-time-to-buy-and-sell-stock-iii|best-time-to-buy-and-sell-stock-iii|best-time-to-buy-and-sell-stock-iii|-uQGzhYj8BQ
+Best time to buy and sell stock IV|p|best-time-to-buy-and-sell-stock-iv|best-time-to-buy-and-sell-stock-iv|best-time-to-buy-and-sell-stock-iv|IV1dHbk5CDc
+Best time to buy and sell stock with transaction fees|c|best-time-to-buy-and-sell-stock-with-transaction-fee|best-time-to-buy-and-sell-stock-with-cooldown-and-transaction-fees|best-time-to-buy-and-sell-stock-with-transaction-fee|k4eK-vEmnKg
+Best Time to Buy and Sell Stock with Cooldown|c|best-time-to-buy-and-sell-stock-with-cooldown|best-time-to-buy-and-sell-stock-with-cooldown|best-time-to-buy-and-sell-stock-with-cooldown|IGIe46xw3YY
+##|DP on subsequences
+Subset sum equals to target|c||subset-sum-equals-to-target|subset-sum-equal-to-target|rYkfBRtMJr8
+Partition equal subset sum|c|partition-equal-subset-sum|partition-equal-subset-sum||7win3dcgo3k
+Partition a set into two subsets with minimum absolute sum difference|p|last-stone-weight-ii|partition-a-set-into-two-subsets-with-minimum-absolute-sum-difference||GS_OqZb2CWc
+Count subsets with sum K|c||count-subsets-with-sum-k|count-subsets-with-sum-k|ZHyb-A2Mte4
+Count partitions with given difference|c||count-partitions-with-given-difference|count-partitions-with-a-given-difference|zoilQD1kYSg
+0 and 1 Knapsack|c||0-and-1-knapsack||GqOmJHQZivw
+Minimum coins|c|coin-change|minimum-coins||myPeWb3Y68A
+Target sum|c|target-sum|target-sum||b3GD8263-PQ
+Coin change II|p|coin-change-ii|coin-change-ii|coin-change-ii-combinations|HgyouUi11zk
+Unbounded knapsack|c||unbounded-knapsack|unbounded-knapsack|OgvOZ6OrJoY
+Rod cutting problem|p||rod-cutting-problem|rod-cutting-problem|mO8XpGoJwuo
+##|LIS
+Longest Increasing Subsequence|c|longest-increasing-subsequence|longest-increasing-subsequence||on2hvxBXJH4
+Print Longest Increasing Subsequence|p||print-longest-increasing-subsequence|print-longest-increasing-subsequence|IFfYfonAFGc
+Largest Divisible Subset|c|largest-divisible-subset|largest-divisible-subset|largest-divisible-subset|gDuZwBW9VvM
+Longest String Chain|c|longest-string-chain|longest-string-chain||YY8iBaYcc4g
+Longest Bitonic Subsequence|c||longest-bitonic-subsequence||y4vN0WNdrlg
+Number of Longest Increasing Subsequences|c|number-of-longest-increasing-subsequence|number-of-longest-increasing-subsequences||cKVl1TFdNXg
+##|DP on strings
+Longest common subsequence|c|longest-common-subsequence|longest-common-subsequence||-zI4mrF2Pb4
+Longest common substring|c||longest-common-substring||_wP9mWNPL5w
+Longest palindromic subsequence|c|longest-palindromic-subsequence|longest-palindromic-subsequence||6i_T5kkfv4A
+Minimum insertions to make string palindrome|p|minimum-insertion-steps-to-make-a-string-palindrome|minimum-insertions-to-make-string-palindrome||xPBLEj41rFU
+Minimum insertions or deletions to convert string A to B|c|delete-operation-for-two-strings|minimum-insertions-or-deletions-to-convert-string-a-to-b||yMnH0jrir0Q
+Shortest common supersequence|p|shortest-common-supersequence|shortest-common-supersequence||xElxAuBcvsU
+Distinct subsequences|p|distinct-subsequences|distinct-subsequences||nVG7eTiD2bY
+Edit distance|p|edit-distance|edit-distance||fJaKO8FbDdo
+Wildcard matching|p|wildcard-matching|wildcard-matching||ZmlQ3vgAOMo
+Word Break|c|word-break|word-break
+Count Palindromic Subsequences|p|count-palindromic-subsequences|count-palindromic-subsequences
+##|MCM DP
+Matrix chain multiplication|p||matrix-chain-multiplication||vRVfmbCFW7Y
+Burst balloons|p|burst-balloons|burst-balloons||Yz4LlDSlkns
+Palindrome partitioning II|p|palindrome-partitioning-ii|palindrome-partitioning-ii-|palindrome-partitioning-ii-minimum-cuts|_H8V5hJUGd0
+Partition Array for Maximum Sum|p|partition-array-for-maximum-sum|partition-array-for-maximum-sum||PhWWJmaKfMc
+Minimum cost to cut the stick|p|minimum-cost-to-cut-a-stick|minimum-cost-to-cut-the-stick||xwomavsC86c
+Different Ways to Evaluate a Boolean Expression|p|parsing-a-boolean-expression|different-ways-to-evaluate-a-boolean-expression||MM7fXopgyjw
+#|Tries
+##|Theory
+Bit PreRequisites for TRIE Problems|||||5iyuU4hQFrw|bit-prerequisites-for-trie-problems@triessubc
+Trie Implementation and Operations|c|implement-trie-prefix-tree|trie-implementation-and-operations||dBGUmUQhjaM
+Trie Implementation and Advanced Operations|c|implement-trie-ii-prefix-tree|trie-implementation-and-advanced-operations
+##|Problems
+Longest Word with All Prefixes|c|longest-word-with-all-prefixes|longest-word-with-all-prefixes||AWnBa91lThI
+Number of distinct substrings in a string|p|number-of-distinct-substrings-in-a-string|number-of-distinct-substrings-in-a-string||RV0QeTyHZxo
+Maximum XOR of two numbers in an array|c|maximum-xor-of-two-numbers-in-an-array|maximum-xor-of-two-numbers-in-an-array||EIhAwfHubE8
+Maximum Xor with an element from an array|p|maximum-xor-with-an-element-from-array|maximum-xor-with-an-element-from-an-array||Q8LhG9Pi5KM
+#|Strings (Advanced Algo)
+##|Medium Problems
+Reverse every word in a string|c|reverse-words-in-a-string|reverse-every-word-in-a-string
+Minimum number of bracket reversals to make an expression balanced|c|minimum-add-to-make-parentheses-valid|minimum-number-of-bracket-reversals-to-make-an-expression-balanced
+Count and say|c|count-and-say|count-and-say
+##|Advanced Problems (Less asked)
+Hashing In Strings / Theory||||||hashing-in-strings-theory@advanced-problems-%28less-asked%29
+Rabin Karp Algorithm|p|repeated-string-match/discuss/416144/Rabin-Karp-algorithm-C%2B%2B-implementation|rabin-karp-algorithm
+Z function|p||z-function
+KMP Algorithm or LPS array|p|implement-strstr|kmp-algorithm-or-lps-array
+Shortest Palindrome|p|shortest-palindrome|shortest-palindrome
+Longest happy prefix|p|longest-happy-prefix|longest-happy-prefix
+#|Maths
+##|Sieve of Eratosthenes
+Print all primes till N|c||print-all-primes-till-n
+Prime factorisation of a Number|c||prime-factorisation-of-a-number||LT7XhVdeRyg
+Count primes in range L to R|p|count-primes|count-primes-in-range-l-to-r||g5Fuxn_AvSk
+`;
+
+/* =====================================================================
+   Utilities
+   ===================================================================== */
+const $  = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const enc = encodeURIComponent;
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const slugify = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const pct = (a, b) => (b ? Math.round((a / b) * 100) : 0);
+const DIFF_LABEL = { E: 'Easy', M: 'Medium', H: 'Hard', T: 'Theory', U: 'Unrated' };
+
+const store = {
+  get(k, fallback) { try { const v = localStorage.getItem(k); return v == null ? fallback : JSON.parse(v); } catch { return fallback; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+};
+const KEYS = { done: 'a2z:done:v2', notes: 'a2z:notes:v2', open: 'a2z:open:v2', theme: 'a2z:theme' };
+
+const ICONS = {
+  code: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
+  article: '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>',
+  video: '<path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/>',
+  notes: '<path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/>',
+  sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>',
+  moon: '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>',
+  chevron: '<path d="m6 9 6 6 6-6"/>',
+  search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+  download: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/>',
+  upload: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/>',
+  reset: '<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>',
+  x: '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
+  arrowRight: '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+  check: '<path d="M20 6 9 17l-5-5"/>',
+  tuf: '<path d="M12 20h9"/><path d="M4 4h6a2 2 0 0 1 2 2v14a3 3 0 0 0-3-3H4z"/><path d="M20 4h-6a2 2 0 0 0-2 2v14a3 3 0 0 1 3-3h5z"/>',
+  unfold: '<path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/>',
+};
+const icon = (name, cls = 'w-4 h-4') =>
+  `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name]}</svg>`;
+
+/* =====================================================================
+   Parse sheet
+   ===================================================================== */
+function parseSheet(raw) {
+  const steps = [];
+  const seen = new Set();
+  let step = null, sub = null, n = 0;
+  const LEVEL = { b: 'E', c: 'M', p: 'H' };
+  raw.split('\n').forEach(line => {
+    const t = line.trim();
+    if (!t) return;
+    const f = t.split('|');
+    if (f[0] === '##') {
+      sub = { title: f[1], problems: [] };
+      step.subs.push(sub);
+    } else if (f[0] === '#') {
+      step = { num: steps.length + 1, title: f[1], subs: [] };
+      steps.push(step);
+    } else {
+      const [title, lvl = '', lc = '', tuf = '', blog = '', yt = '', learn = ''] = f;
+      let id = `s${step.num}-${slugify(title)}`;
+      while (seen.has(id)) id += '-x';
+      seen.add(id);
+      n += 1;
+      sub.problems.push({
+        id, n, title, step: step.num, sub: sub.title,
+        diff: LEVEL[lvl] || (learn ? 'T' : 'U'),
+        lc, tuf, blog, yt, learn,
+      });
+    }
+  });
+  return steps;
+}
+const SHEET = parseSheet(RAW);
+const ALL = SHEET.flatMap(s => s.subs.flatMap(sb => sb.problems));
+const BY_ID = new Map(ALL.map(p => [p.id, p]));
+
+/* Exact links, taken from takeUforward's live A2Z sheet */
+const TUF = 'https://takeuforward.org';
+function ytUrl(v) {
+  if (!v) return null;
+  if (/^https?:/.test(v)) return v;
+  const id = v.slice(0, 11);
+  const t = (v.match(/[?&]t=(\d+)/) || [])[1];
+  return t ? `https://www.youtube.com/watch?v=${id}&t=${t}s` : `https://youtu.be/${id}`;
+}
+function linksFor(p) {
+  const tufPage = p.tuf ? `${TUF}/practice/dsa/${p.tuf}` : null;
+  const lesson = p.learn
+    ? (([slug, cat]) => `${TUF}/learning/dsa/${slug}?category=${cat}&source=strivers-a2z-dsa-sheet`)(p.learn.split('@'))
+    : null;
+  const v = ytUrl(p.yt);
+  return {
+    tuf: tufPage ? { href: tufPage, tip: 'Solve on takeUforward' }
+       : lesson ? { href: lesson, tip: 'Open lesson on takeUforward' } : null,
+    article: p.blog ? { href: `${TUF}/blogs/data-structure-and-algorithm/${p.blog}`, tip: 'Read takeUforward article' } : null,
+    video: v ? { href: v, tip: 'Watch Striver’s video' } : null,
+    lc: p.lc ? { href: `https://leetcode.com/problems/${p.lc.replace(/\/$/, '')}${p.lc.includes('/') ? '' : '/'}`, tip: 'Solve on LeetCode' } : null,
+  };
+}
+function actLink(kind, ico, L, emptyTip) {
+  return L
+    ? `<a class="act ${kind}" href="${esc(L.href)}" target="_blank" rel="noopener" data-tip="${L.tip}" aria-label="${L.tip}">${icon(ico, '')}</a>`
+    : `<span class="act off" data-tip="${emptyTip}" aria-label="${emptyTip}">${icon(ico, '')}</span>`;
+}
+
+/* =====================================================================
+   State
+   ===================================================================== */
+let done  = store.get(KEYS.done, {});
+let notes = store.get(KEYS.notes, {});
+let openSteps = new Set(store.get(KEYS.open, [1]));
+const filters = { q: '', diff: 'all', status: 'all' };
+
+/* =====================================================================
+   Render
+   ===================================================================== */
+const rowEls = new Map();
+
+function rowHTML(p) {
+  const L = linksFor(p);
+  const isDone = !!done[p.id];
+  const hasNotes = !!notes[p.id] && (notes[p.id].code || notes[p.id].time || notes[p.id].space);
+  return `
+  <li class="row ${isDone ? 'done' : ''}" data-id="${p.id}">
+    <label class="cb" title="Mark as solved">
+      <input type="checkbox" ${isDone ? 'checked' : ''} aria-label="Mark ${esc(p.title)} as solved" />
+      <span class="box">${icon('check', '')}</span>
+    </label>
+    <span class="num font-mono text-[11px] t-faint w-7 shrink-0 hidden sm:inline">${String(p.n).padStart(3, '0')}</span>
+    <div class="min-w-0 flex-1 flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3">
+      <p class="title min-w-0 sm:truncate leading-snug" title="${esc(p.title)}">${esc(p.title)}</p>
+      <span class="badge ${p.diff} self-start sm:self-auto sm:ml-auto">${DIFF_LABEL[p.diff]}</span>
+    </div>
+    <div class="flex items-center gap-0.5 shrink-0">
+      ${actLink('tuf', 'tuf', L.tuf, 'Not on takeUforward practice')}
+      ${actLink('article', 'article', L.article, 'No article on the sheet')}
+      ${actLink('video', 'video', L.video, 'No video on the sheet')}
+      ${actLink('practice', 'code', L.lc, 'No LeetCode link on the sheet')}
+      <button class="act notes ${hasNotes ? 'has' : ''}" data-notes data-tip="C++ notes" aria-label="C++ notes">${icon('notes', '')}</button>
+    </div>
+  </li>`;
+}
+
+function render() {
+  const stepsEl = $('#steps');
+  stepsEl.innerHTML = SHEET.map(s => {
+    const total = s.subs.reduce((a, sb) => a + sb.problems.length, 0);
+    return `
+    <section class="step panel rounded-2xl ${openSteps.has(s.num) ? 'open' : ''}" id="step-${s.num}" data-step="${s.num}">
+      <button class="step-head flex items-center gap-4 p-4 sm:p-5" aria-expanded="${openSteps.has(s.num)}" aria-controls="step-body-${s.num}">
+        <div class="relative shrink-0">
+          <svg viewBox="0 0 40 40" class="w-11 h-11 -rotate-90">
+            <circle cx="20" cy="20" r="16" fill="none" stroke-width="3.5" class="ring-track"></circle>
+            <circle cx="20" cy="20" r="16" fill="none" stroke-width="3.5" stroke-linecap="round" class="ring-fill" data-ring stroke-dasharray="100.53" stroke-dashoffset="100.53"></circle>
+          </svg>
+          <span class="absolute inset-0 grid place-items-center font-mono text-[10.5px] font-semibold" data-ringpct>0%</span>
+        </div>
+        <div class="min-w-0 flex-1">
+          <div class="font-mono text-[11px] font-medium t-faint tracking-wide">STEP ${String(s.num).padStart(2, '0')}</div>
+          <h2 class="step-title mt-0.5 font-semibold tracking-tight text-[15px] sm:text-base">${esc(s.title)}</h2>
+          <div class="mt-1 text-xs t-muted font-mono"><span data-stepdone>0</span>/<span>${total}</span> solved<span class="hidden sm:inline"> · ${s.subs.length} sub-topic${s.subs.length > 1 ? 's' : ''}</span></div>
+        </div>
+        <span class="chev shrink-0">${icon('chevron', 'w-5 h-5')}</span>
+      </button>
+      <div class="step-body" id="step-body-${s.num}">
+        <div>
+          <div class="px-2 sm:px-3 pb-3 space-y-2">
+            ${s.subs.map((sb, i) => `
+              <div class="sub rounded-xl border hairline" data-sub="${s.num}-${i}" style="background:color-mix(in srgb, var(--panel-2) 45%, transparent)">
+                <div class="flex items-center gap-3 px-3.5 pt-3 pb-2">
+                  <h3 class="text-[13px] font-semibold t-2 min-w-0 truncate">${esc(sb.title)}</h3>
+                  <div class="ml-auto flex items-center gap-3 shrink-0">
+                    <span class="font-mono text-[11px] t-muted"><span data-subdone>0</span>/${sb.problems.length}</span>
+                    <div class="bar thin w-20 sm:w-32"><i data-subbar></i></div>
+                  </div>
+                </div>
+                <ul class="px-1 pb-1.5">${sb.problems.map(rowHTML).join('')}</ul>
+              </div>`).join('')}
+          </div>
+        </div>
+      </div>
+    </section>`;
+  }).join('');
+
+  $$('.row', stepsEl).forEach(el => rowEls.set(el.dataset.id, el));
+
+  $('#nav').innerHTML = SHEET.map(s => `
+    <button class="nav-item" data-goto="${s.num}">
+      <div class="flex items-center gap-2">
+        <span class="font-mono text-[10.5px] t-faint w-5">${String(s.num).padStart(2, '0')}</span>
+        <span class="text-[13px] t-2 truncate flex-1">${esc(s.title.replace(/\s*\[.*\]\s*$/, ''))}</span>
+        <span class="font-mono text-[10.5px] t-muted" data-navcount></span>
+      </div>
+      <div class="bar thin mt-1.5 ml-7"><i data-navbar></i></div>
+    </button>`).join('');
+}
+
+/* =====================================================================
+   Progress
+   ===================================================================== */
+const RING_C = 2 * Math.PI * 16; // 100.53
+
+function setRing(el, p) { el.style.strokeDashoffset = RING_C * (1 - p / 100); }
+function setBar(el, p) {
+  el.style.width = p + '%';
+  el.parentElement.classList.toggle('full', p === 100);
+}
+
+function refresh() {
+  const totalDone = ALL.filter(p => done[p.id]).length;
+  const total = ALL.length;
+  const p = pct(totalDone, total);
+
+  $('#hdrDone').textContent = totalDone;
+  $('#hdrTotal').textContent = total;
+  $('#hdrPct').textContent = p + '%';
+  setBar($('#hdrBar'), p);
+  $('#heroDone').textContent = totalDone;
+  $('#heroTotal').textContent = total;
+  setRing($('#heroRing'), p);
+
+  ['E', 'M', 'H'].forEach(d => {
+    const list = ALL.filter(x => x.diff === d);
+    const dn = list.filter(x => done[x.id]).length;
+    const card = $(`[data-stat="${d}"]`);
+    card.querySelector('[data-done]').textContent = dn;
+    card.querySelector('[data-total]').textContent = list.length;
+    card.querySelector('[data-pct]').textContent = pct(dn, list.length) + '%';
+    setBar(card.querySelector('.bar > i'), pct(dn, list.length));
+  });
+
+  SHEET.forEach((s, si) => {
+    const sec = $(`#step-${s.num}`);
+    let sDone = 0, sTotal = 0;
+    s.subs.forEach((sb, i) => {
+      const d = sb.problems.filter(x => done[x.id]).length;
+      sDone += d; sTotal += sb.problems.length;
+      const subEl = sec.querySelector(`[data-sub="${s.num}-${i}"]`);
+      subEl.querySelector('[data-subdone]').textContent = d;
+      setBar(subEl.querySelector('[data-subbar]'), pct(d, sb.problems.length));
+    });
+    const sp = pct(sDone, sTotal);
+    sec.querySelector('[data-stepdone]').textContent = sDone;
+    sec.querySelector('[data-ringpct]').textContent = sp + '%';
+    setRing(sec.querySelector('[data-ring]'), sp);
+    sec.classList.toggle('complete', sDone === sTotal && sTotal > 0);
+
+    const nav = $$('#nav .nav-item')[si];
+    nav.querySelector('[data-navcount]').textContent = `${sDone}/${sTotal}`;
+    setBar(nav.querySelector('[data-navbar]'), sp);
+  });
+
+  const next = ALL.find(x => !done[x.id]);
+  $('#continueLabel').textContent = !next ? 'Sheet complete' : totalDone === 0 ? 'Start with Step 1' : 'Continue where you left off';
+}
+
+function stepProgress(num) {
+  const s = SHEET.find(x => x.num === num);
+  const list = s.subs.flatMap(sb => sb.problems);
+  return { done: list.filter(x => done[x.id]).length, total: list.length, title: s.title };
+}
+
+/* =====================================================================
+   Filtering
+   ===================================================================== */
+function isFiltering() { return !!filters.q || filters.diff !== 'all' || filters.status !== 'all'; }
+
+function applyFilters() {
+  const q = filters.q.toLowerCase();
+  let any = false;
+  SHEET.forEach(s => {
+    const sec = $(`#step-${s.num}`);
+    let stepVisible = false;
+    s.subs.forEach((sb, i) => {
+      let subVisible = false;
+      sb.problems.forEach(p => {
+        const ok =
+          (!q || p.title.toLowerCase().includes(q) || sb.title.toLowerCase().includes(q)) &&
+          (filters.diff === 'all' || p.diff === filters.diff) &&
+          (filters.status === 'all' || (filters.status === 'done' ? !!done[p.id] : !done[p.id]));
+        rowEls.get(p.id).hidden = !ok;
+        if (ok) subVisible = true;
+      });
+      sec.querySelector(`[data-sub="${s.num}-${i}"]`).hidden = !subVisible;
+      if (subVisible) stepVisible = true;
+    });
+    sec.hidden = !stepVisible;
+    if (stepVisible) any = true;
+  });
+  document.body.classList.toggle('filtering', isFiltering());
+  $('#empty').classList.toggle('hidden', any);
+}
+
+/* =====================================================================
+   Accordion
+   ===================================================================== */
+function setOpen(num, open) {
+  const sec = $(`#step-${num}`);
+  sec.classList.toggle('open', open);
+  sec.querySelector('.step-head').setAttribute('aria-expanded', open);
+  open ? openSteps.add(num) : openSteps.delete(num);
+  store.set(KEYS.open, [...openSteps]);
+  syncToggleAll();
+}
+function syncToggleAll() {
+  $('#toggleAllLabel').textContent = openSteps.size === SHEET.length ? 'Collapse all' : 'Expand all';
+}
+
+/* =====================================================================
+   Toast
+   ===================================================================== */
+let toastTimer;
+function toast(msg) {
+  const t = $('#toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+/* =====================================================================
+   C++ notes dialog
+   ===================================================================== */
+const CPP_TEMPLATE = `// Approach:
+//
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    
+};
+`;
+let activeNote = null;
+let saveTimer;
+
+function openNotes(id) {
+  const p = BY_ID.get(id);
+  activeNote = id;
+  const n = notes[id] || {};
+  $('#notesStep').textContent = `Step ${p.step} · ${p.sub}`;
+  $('#notesTitle').textContent = p.title;
+  const b = $('#notesBadge');
+  b.className = `badge ${p.diff}`;
+  b.textContent = DIFF_LABEL[p.diff];
+  $('#nTime').value = n.time || '';
+  $('#nSpace').value = n.space || '';
+  $('#nCode').value = n.code || CPP_TEMPLATE;
+  $('#notesSaved').textContent = n.updated ? `Last saved ${new Date(n.updated).toLocaleString()}` : 'Saved automatically';
+  $('#notes').showModal();
+  setTimeout(() => $('#nCode').focus(), 50);
+}
+
+function saveNotes() {
+  if (!activeNote) return;
+  const code = $('#nCode').value;
+  const time = $('#nTime').value.trim();
+  const space = $('#nSpace').value.trim();
+  const untouched = code.trim() === CPP_TEMPLATE.trim() && !time && !space;
+  if (untouched) delete notes[activeNote];
+  else notes[activeNote] = { code, time, space, updated: Date.now() };
+  store.set(KEYS.notes, notes);
+  const btn = rowEls.get(activeNote).querySelector('[data-notes]');
+  btn.classList.toggle('has', !untouched);
+  $('#notesSaved').textContent = untouched ? 'Saved automatically' : 'Saved';
+}
+
+/* =====================================================================
+   Theme
+   ===================================================================== */
+function toggleTheme() {
+  const dark = !document.documentElement.classList.contains('dark');
+  document.documentElement.classList.toggle('dark', dark);
+  store.set(KEYS.theme, dark ? 'dark' : 'light');
+}
+
+/* =====================================================================
+   Wire up
+   ===================================================================== */
+function init() {
+  $$('[data-icon]').forEach(el => (el.innerHTML = icon(el.dataset.icon)));
+  render();
+  refresh();
+  applyFilters();
+  syncToggleAll();
+
+  const stepsEl = $('#steps');
+
+  // Completion
+  stepsEl.addEventListener('change', e => {
+    const input = e.target.closest('.cb input');
+    if (!input) return;
+    const row = input.closest('.row');
+    const id = row.dataset.id;
+    const p = BY_ID.get(id);
+    const before = stepProgress(p.step);
+    if (input.checked) done[id] = Date.now(); else delete done[id];
+    store.set(KEYS.done, done);
+    row.classList.toggle('done', input.checked);
+    refresh();
+    const after = stepProgress(p.step);
+    if (after.done === after.total && before.done !== before.total) toast(`Step ${p.step} complete — ${after.title.replace(/\s*\[.*\]\s*$/, '')}`);
+    if (filters.status !== 'all') setTimeout(applyFilters, 350);
+  });
+
+  // Accordion + notes
+  stepsEl.addEventListener('click', e => {
+    const head = e.target.closest('.step-head');
+    if (head) {
+      if (isFiltering()) return;
+      const num = +head.closest('.step').dataset.step;
+      setOpen(num, !openSteps.has(num));
+      return;
+    }
+    const nb = e.target.closest('[data-notes]');
+    if (nb) openNotes(nb.closest('.row').dataset.id);
+  });
+
+  // Sidebar nav
+  $('#nav').addEventListener('click', e => {
+    const b = e.target.closest('[data-goto]');
+    if (!b) return;
+    const num = +b.dataset.goto;
+    if (!openSteps.has(num)) setOpen(num, true);
+    $(`#step-${num}`).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  // Scroll-spy for sidebar
+  const navItems = $$('#nav .nav-item');
+  const spy = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        const num = +en.target.dataset.step;
+        navItems.forEach(n => n.classList.toggle('active', +n.dataset.goto === num));
+      }
+    });
+  }, { rootMargin: '-140px 0px -65% 0px' });
+  $$('.step').forEach(s => spy.observe(s));
+
+  // Filters
+  let qTimer;
+  $('#q').addEventListener('input', e => {
+    clearTimeout(qTimer);
+    qTimer = setTimeout(() => { filters.q = e.target.value.trim(); applyFilters(); }, 90);
+  });
+  $$('.seg button').forEach(b => b.addEventListener('click', () => {
+    const f = b.dataset.f;
+    filters[f] = b.dataset.v;
+    $$(`.seg button[data-f="${f}"]`).forEach(x => x.classList.toggle('active', x === b));
+    applyFilters();
+  }));
+  function clearFilters() {
+    filters.q = ''; filters.diff = 'all'; filters.status = 'all';
+    $('#q').value = '';
+    $$('.seg button').forEach(x => x.classList.toggle('active', x.dataset.v === 'all'));
+    applyFilters();
+  }
+  $('#clearFilters').addEventListener('click', clearFilters);
+
+  // Expand / collapse all
+  $('#toggleAllBtn').addEventListener('click', () => {
+    const openAll = openSteps.size !== SHEET.length;
+    SHEET.forEach(s => setOpen(s.num, openAll));
+  });
+
+  // Continue
+  $('#continueBtn').addEventListener('click', () => {
+    const next = ALL.find(x => !done[x.id]);
+    if (!next) { toast('Every problem solved. Time to revise.'); return; }
+    clearFilters();
+    if (!openSteps.has(next.step)) setOpen(next.step, true);
+    const row = rowEls.get(next.id);
+    setTimeout(() => {
+      row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      row.classList.remove('flash'); void row.offsetWidth; row.classList.add('flash');
+    }, 120);
+  });
+
+  // Theme
+  $('#themeBtn').addEventListener('click', toggleTheme);
+
+  // Notes dialog
+  const dlg = $('#notes');
+  const queueSave = () => { clearTimeout(saveTimer); $('#notesSaved').textContent = 'Saving…'; saveTimer = setTimeout(saveNotes, 300); };
+  ['#nCode', '#nTime', '#nSpace'].forEach(s => $(s).addEventListener('input', queueSave));
+  $('#nCode').addEventListener('keydown', e => {
+    if (e.key === 'Tab' && !e.shiftKey) {
+      e.preventDefault();
+      const ta = e.target, s = ta.selectionStart, en = ta.selectionEnd;
+      ta.value = ta.value.slice(0, s) + '    ' + ta.value.slice(en);
+      ta.selectionStart = ta.selectionEnd = s + 4;
+      queueSave();
+    }
+  });
+  const closeNotes = () => { clearTimeout(saveTimer); saveNotes(); dlg.close(); };
+  $('#notesClose').addEventListener('click', closeNotes);
+  $('#notesDone').addEventListener('click', closeNotes);
+  dlg.addEventListener('cancel', e => { e.preventDefault(); closeNotes(); });
+  dlg.addEventListener('click', e => { if (e.target === dlg) closeNotes(); });
+  $('#notesCopy').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText($('#nCode').value); toast('C++ code copied'); }
+    catch { toast('Copy failed — select and copy manually'); }
+  });
+
+  // Export / import / reset
+  $('#exportBtn').addEventListener('click', () => {
+    const blob = new Blob([JSON.stringify({ app: 'a2z-cpp-tracker', version: 1, exportedAt: new Date().toISOString(), done, notes }, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `a2z-progress-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    toast('Progress exported');
+  });
+  $('#importBtn').addEventListener('click', () => $('#importFile').click());
+  $('#importFile').addEventListener('change', async e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    try {
+      const data = JSON.parse(await file.text());
+      if (typeof data.done !== 'object') throw new Error('bad file');
+      done = Object.fromEntries(Object.entries(data.done).filter(([k]) => BY_ID.has(k)));
+      notes = data.notes && typeof data.notes === 'object' ? data.notes : {};
+      store.set(KEYS.done, done); store.set(KEYS.notes, notes);
+      render(); refresh(); applyFilters();
+      $$('.step').forEach(s => spy.observe(s));
+      toast(`Imported ${Object.keys(done).length} solved problems`);
+    } catch { toast('That file is not a valid progress export'); }
+    e.target.value = '';
+  });
+  $('#resetBtn').addEventListener('click', () => {
+    if (!confirm('Reset all progress? Your C++ notes will be kept.')) return;
+    done = {}; store.set(KEYS.done, done);
+    $$('.row').forEach(r => { r.classList.remove('done'); r.querySelector('input').checked = false; });
+    refresh(); applyFilters();
+    toast('Progress reset');
+  });
+
+  // Keyboard
+  document.addEventListener('keydown', e => {
+    if (dlg.open) return;
+    const typing = /INPUT|TEXTAREA/.test(document.activeElement.tagName);
+    if (e.key === '/' && !typing) { e.preventDefault(); $('#q').focus(); }
+    if (e.key === 'Escape' && document.activeElement === $('#q')) { clearFilters(); $('#q').blur(); }
+  });
+
+  // Keep in sync across tabs
+  window.addEventListener('storage', e => {
+    if (e.key === KEYS.done) {
+      done = store.get(KEYS.done, {});
+      rowEls.forEach((el, id) => { el.classList.toggle('done', !!done[id]); el.querySelector('input').checked = !!done[id]; });
+      refresh(); applyFilters();
+    }
+    if (e.key === KEYS.theme) document.documentElement.classList.toggle('dark', store.get(KEYS.theme) === 'dark');
+  });
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
