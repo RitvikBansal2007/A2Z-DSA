@@ -173,8 +173,13 @@
   .step-head { width: 100%; text-align: left; border-radius: .9rem; transition: background .15s; }
   .step-head:hover { background: var(--hover); }
   .step-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s cubic-bezier(.22, 1, .36, 1); }
-  .step-body > div { overflow: hidden; min-height: 0; }
+  /* Closed steps skip rendering their rows; allow-discrete keeps them painted while the close animates */
+  .step-body > div { overflow: hidden; min-height: 0; content-visibility: hidden; transition: content-visibility .35s; transition-behavior: allow-discrete; }
   .step.open .step-body, body.filtering .step-body { grid-template-rows: 1fr; }
+  .step.open .step-body > div, body.filtering .step-body > div { content-visibility: visible; transition: none; }
+  /* Theme switch: one crossfade instead of thousands of staggered per-element transitions */
+  .no-anim *, .no-anim *::before, .no-anim *::after { transition: none !important; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .2s; }
   .chev { transition: transform .25s ease; color: var(--faint); }
   .step.open .chev, body.filtering .chev { transform: rotate(180deg); }
   .step.complete .step-title::after {
@@ -1103,7 +1108,7 @@ const store = {
   get(k, fallback) { try { const v = localStorage.getItem(k); return v == null ? fallback : JSON.parse(v); } catch { return fallback; } },
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
 };
-const KEYS = { done: 'a2z:done:v2', notes: 'a2z:notes:v2', open: 'a2z:open:v2', theme: 'a2z:theme' };
+const KEYS = { done: 'a2z:done:v2', notes: 'a2z:notes:v2', theme: 'a2z:theme' };
 
 const ICONS = {
   code: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
@@ -1197,7 +1202,7 @@ function actLink(kind, ico, L, emptyTip) {
    ===================================================================== */
 let done  = store.get(KEYS.done, {});
 let notes = store.get(KEYS.notes, {});
-let openSteps = new Set(store.get(KEYS.open, [1]));
+let openSteps = new Set(); // always start collapsed; "Continue" opens the right step
 const filters = { q: '', diff: 'all', status: 'all' };
 
 /* =====================================================================
@@ -1388,7 +1393,6 @@ function setOpen(num, open) {
   sec.classList.toggle('open', open);
   sec.querySelector('.step-head').setAttribute('aria-expanded', open);
   open ? openSteps.add(num) : openSteps.delete(num);
-  store.set(KEYS.open, [...openSteps]);
   syncToggleAll();
 }
 function syncToggleAll() {
@@ -1458,9 +1462,19 @@ function saveNotes() {
 /* =====================================================================
    Theme
    ===================================================================== */
+function setTheme(dark) {
+  const root = document.documentElement;
+  const apply = () => {
+    root.classList.add('no-anim');
+    root.classList.toggle('dark', dark);
+    requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove('no-anim')));
+  };
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.startViewTransition && !reduce && !document.hidden ? document.startViewTransition(apply) : apply();
+}
 function toggleTheme() {
   const dark = !document.documentElement.classList.contains('dark');
-  document.documentElement.classList.toggle('dark', dark);
+  setTheme(dark);
   store.set(KEYS.theme, dark ? 'dark' : 'light');
 }
 
@@ -1558,12 +1572,14 @@ function init() {
     const next = ALL.find(x => !done[x.id]);
     if (!next) { toast('Every problem solved. Time to revise.'); return; }
     clearFilters();
-    if (!openSteps.has(next.step)) setOpen(next.step, true);
+    const wasOpen = openSteps.has(next.step);
+    if (!wasOpen) setOpen(next.step, true);
     const row = rowEls.get(next.id);
+    // wait out the expand animation so the scroll target isn't still moving
     setTimeout(() => {
       row.scrollIntoView({ behavior: 'smooth', block: 'center' });
       row.classList.remove('flash'); void row.offsetWidth; row.classList.add('flash');
-    }, 120);
+    }, wasOpen ? 0 : 380);
   });
 
   // Theme
@@ -1641,7 +1657,7 @@ function init() {
       rowEls.forEach((el, id) => { el.classList.toggle('done', !!done[id]); el.querySelector('input').checked = !!done[id]; });
       refresh(); applyFilters();
     }
-    if (e.key === KEYS.theme) document.documentElement.classList.toggle('dark', store.get(KEYS.theme) === 'dark');
+    if (e.key === KEYS.theme) setTheme(store.get(KEYS.theme) === 'dark');
   });
 }
 
