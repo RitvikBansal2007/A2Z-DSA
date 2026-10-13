@@ -242,6 +242,10 @@
   .act.article:hover  { color: var(--accent); }
   .act.tuf:hover      { color: var(--easy-fg); }
   .act.video:hover    { color: #ef4444; }
+  .act.mark.on { color: var(--med-fg); }
+  .act.mark.on svg { fill: currentColor; }
+  /* .row/.act set display, which would otherwise beat the hidden attribute and break filtering */
+  [hidden] { display: none !important; }
   .act.notes.has { color: var(--accent); }
   .act.notes.has::after {
     content: ''; position: absolute; top: 6px; right: 6px; width: 5px; height: 5px; border-radius: 999px; background: var(--accent);
@@ -412,6 +416,7 @@
         <button data-f="status" data-v="all" class="active">Any</button>
         <button data-f="status" data-v="todo">To do</button>
         <button data-f="status" data-v="done">Solved</button>
+        <button data-f="status" data-v="marked">Bookmarked</button>
       </div>
       <button class="btn-ghost" id="toggleAllBtn" title="Expand / collapse all">
         <span data-icon="unfold"></span><span class="text-[13px] font-medium hidden md:inline" id="toggleAllLabel">Expand all</span>
@@ -1108,7 +1113,7 @@ const store = {
   get(k, fallback) { try { const v = localStorage.getItem(k); return v == null ? fallback : JSON.parse(v); } catch { return fallback; } },
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
 };
-const KEYS = { done: 'a2z:done:v2', notes: 'a2z:notes:v2', theme: 'a2z:theme' };
+const KEYS = { done: 'a2z:done:v2', notes: 'a2z:notes:v2', marks: 'a2z:marks:v1', theme: 'a2z:theme' };
 
 const ICONS = {
   code: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
@@ -1126,6 +1131,7 @@ const ICONS = {
   arrowRight: '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
   check: '<path d="M20 6 9 17l-5-5"/>',
   tuf: '<path d="M12 20h9"/><path d="M4 4h6a2 2 0 0 1 2 2v14a3 3 0 0 0-3-3H4z"/><path d="M20 4h-6a2 2 0 0 0-2 2v14a3 3 0 0 1 3-3h5z"/>',
+  bookmark: '<path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/>',
   unfold: '<path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/>',
 };
 const icon = (name, cls = 'w-4 h-4') =>
@@ -1202,6 +1208,7 @@ function actLink(kind, ico, L, emptyTip) {
    ===================================================================== */
 let done  = store.get(KEYS.done, {});
 let notes = store.get(KEYS.notes, {});
+let marks = store.get(KEYS.marks, {});
 let openSteps = new Set(); // always start collapsed; "Continue" opens the right step
 const filters = { q: '', diff: 'all', status: 'all' };
 
@@ -1230,6 +1237,7 @@ function rowHTML(p) {
       ${actLink('article', 'article', L.article, 'No article on the sheet')}
       ${actLink('video', 'video', L.video, 'No video on the sheet')}
       ${actLink('practice', 'code', L.lc, 'No LeetCode link on the sheet')}
+      <button class="act mark ${marks[p.id] ? 'on' : ''}" data-mark data-tip="Bookmark" aria-label="Bookmark" aria-pressed="${!!marks[p.id]}">${icon('bookmark', '')}</button>
       <button class="act notes ${hasNotes ? 'has' : ''}" data-notes data-tip="C++ notes" aria-label="C++ notes">${icon('notes', '')}</button>
     </div>
   </li>`;
@@ -1371,7 +1379,7 @@ function applyFilters() {
         const ok =
           (!q || p.title.toLowerCase().includes(q) || sb.title.toLowerCase().includes(q)) &&
           (filters.diff === 'all' || p.diff === filters.diff) &&
-          (filters.status === 'all' || (filters.status === 'done' ? !!done[p.id] : !done[p.id]));
+          (filters.status === 'all' || (filters.status === 'marked' ? !!marks[p.id] : filters.status === 'done' ? !!done[p.id] : !done[p.id]));
         rowEls.get(p.id).hidden = !ok;
         if (ok) subVisible = true;
       });
@@ -1516,6 +1524,16 @@ function init() {
       setOpen(num, !openSteps.has(num));
       return;
     }
+    const mb = e.target.closest('[data-mark]');
+    if (mb) {
+      const id = mb.closest('.row').dataset.id;
+      if (marks[id]) delete marks[id]; else marks[id] = Date.now();
+      store.set(KEYS.marks, marks);
+      mb.classList.toggle('on', !!marks[id]);
+      mb.setAttribute('aria-pressed', !!marks[id]);
+      if (filters.status === 'marked') applyFilters();
+      return;
+    }
     const nb = e.target.closest('[data-notes]');
     if (nb) openNotes(nb.closest('.row').dataset.id);
   });
@@ -1610,7 +1628,7 @@ function init() {
 
   // Export / import / reset
   $('#exportBtn').addEventListener('click', () => {
-    const blob = new Blob([JSON.stringify({ app: 'a2z-cpp-tracker', version: 1, exportedAt: new Date().toISOString(), done, notes }, null, 2)], { type: 'application/json' });
+    const blob = new Blob([JSON.stringify({ app: 'a2z-cpp-tracker', version: 1, exportedAt: new Date().toISOString(), done, notes, marks }, null, 2)], { type: 'application/json' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
     a.download = `a2z-progress-${new Date().toISOString().slice(0, 10)}.json`;
@@ -1627,7 +1645,8 @@ function init() {
       if (typeof data.done !== 'object') throw new Error('bad file');
       done = Object.fromEntries(Object.entries(data.done).filter(([k]) => BY_ID.has(k)));
       notes = data.notes && typeof data.notes === 'object' ? data.notes : {};
-      store.set(KEYS.done, done); store.set(KEYS.notes, notes);
+      marks = data.marks && typeof data.marks === 'object' ? data.marks : {};
+      store.set(KEYS.done, done); store.set(KEYS.notes, notes); store.set(KEYS.marks, marks);
       render(); refresh(); applyFilters();
       $$('.step').forEach(s => spy.observe(s));
       toast(`Imported ${Object.keys(done).length} solved problems`);
